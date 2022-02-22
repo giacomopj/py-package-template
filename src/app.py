@@ -1,8 +1,9 @@
 def run(name: str = "World") -> int:
     """This function is the entry point of the application.
-    It essentially greets :param:`name`.
-    .. note:: Note that the entry point could be also the method
-    of a class :class:`App`
+    It essentially greets 'name'.
+
+    .. note::
+       The entry point could be also a method 'run' of a class 'App'
 
     :Example:
 
@@ -11,13 +12,10 @@ def run(name: str = "World") -> int:
     Hello Giacomo!
     0
 
-    :param name: The name to use, defaults to "World"
-    :type name: str, optional
-    ...
-    :raises Exception: The in-built base class for exceptions
-    ...
-    :return: Return code
+    :param str name: the name to greet, defaults to 'World'
+    :return: return code
     :rtype: int
+    :raises Exception: in-built base class for exceptions
     """
     print(f"Hello {name}!")
     return 0

@@ -129,10 +129,10 @@ dmypy.json
 .pyre/
 
 # PyCharm settings
-.idea
+.idea/
 
 # VS Code settings
-# .vscode
+# .vscode/
 
 # macOS folder attributes
-.DS_Store
+.DS_Store/

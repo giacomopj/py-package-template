@@ -1,7 +1,7 @@
-Some Examples
-=============
+Example
+=======
 
-Here are some examples to get you started.
+Here is an example of function documentation.
 
 .. automodule:: src.app
     :members:
