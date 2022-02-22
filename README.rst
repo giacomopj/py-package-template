@@ -1,4 +1,15 @@
+===================
 py-package-template
 ===================
 
-A template package for modern Python
+This is a template for Python **modern** packages.
+
+Overview
+========
+
+Overview.
+
+Setup
+=====
+
+Setup.
