@@ -131,3 +131,6 @@ dmypy.json
 # VS Code stuff:
 .idea
 .vscode
+
+# macOS folder attributes
+.DS_Store
