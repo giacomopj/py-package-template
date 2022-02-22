@@ -7,6 +7,6 @@
     "python.linting.enabled": true,
     "python.linting.flake8Enabled": true,
     "python.linting.pylintEnabled": false,
-    "python.linting.pycodestyleEnabled": true,
+    "python.linting.pycodestyleEnabled": false,
     "restructuredtext.confPath": ""
 }
