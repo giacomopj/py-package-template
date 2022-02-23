@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "py-package-template"
 version = "0.1.0"
-description = "Python modern package template"
+description = "Python package template"
 authors = ["Giacomo Pojani <giacomo.pj@hotmail.it>"]
 packages = [
     {include = "src"}
