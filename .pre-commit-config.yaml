@@ -10,24 +10,54 @@ repos:
     -   id: check-toml
     -   id: check-merge-conflict
     -   id: check-added-large-files
--   repo: https://github.com/pre-commit/mirrors-autopep8
-    rev: 'v1.6.0'
-    hooks:
-    -   id: autopep8
--   repo: https://gitlab.com/pycqa/flake8
-    rev: 3.9.2
+# -   repo: https://gitlab.com/pycqa/flake8
+#     rev: 3.9.2
+#     hooks:
+#     -   id: flake8
+#         args: [--config, ./setup.cfg]
+# -   repo: https://github.com/psf/black
+#     rev: 22.1.0
+#     hooks:
+#     -   id: black
+# -   repo: https://github.com/pre-commit/mirrors-mypy
+#     rev: v0.931
+#     hooks:
+#     -   id: mypy
+#         exclude: '(docs|tests)'
+#         args: [--config, ./setup.cfg]
+# -   repo: https://github.com/PyCQA/isort
+#     rev: 5.10.1
+#     hooks:
+#     -   id: isort
+-   repo: local
     hooks:
     -   id: flake8
--   repo: https://github.com/psf/black
-    rev: 22.1.0
-    hooks:
-      - id: black
--   repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v0.931
-    hooks:
-        - id: mypy
-          exclude: '(docs|tests)'
--   repo: https://github.com/PyCQA/isort
-    rev: 5.10.1
-    hooks:
+        name: flake8
+        entry: flake8
+        language: python
+        types: [python]
+        args: [--config, setup.cfg]
+    -   id: black
+        name: black
+        entry: black
+        language: python
+        types: [python]
+        args: [--force-exclude, ignored/]
+    -   id: mypy
+        name: mypy
+        entry: mypy
+        language: system
+        types: [python]
+        args: [--config, setup.cfg]
     -   id: isort
+        name: isort
+        entry: isort
+        language: python
+        types: [python]
+    -   id: pytest
+        name: pytest
+        entry: pytest
+        language: system
+        types: [python]
+        pass_filenames: false
+        always_run: true
