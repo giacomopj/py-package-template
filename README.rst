@@ -111,11 +111,7 @@ This folder is meant to contain scripts for:
 Src
 ---
 
-This folder is meant to contain the source code of:
-
-- Modules
-- One package (see template)
-- One library
+This folder is meant to contain the source code of one or more modules or a package ore a library.
 
 .. note::
    Python modules are executable .py scripts
