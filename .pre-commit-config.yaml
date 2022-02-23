@@ -10,42 +10,36 @@ repos:
     -   id: check-toml
     -   id: check-merge-conflict
     -   id: check-added-large-files
+# -   repo: https://github.com/psf/black
+#     rev: 22.1.0
+#     hooks:
+#     -   id: black
 # -   repo: https://gitlab.com/pycqa/flake8
 #     rev: 3.9.2
 #     hooks:
 #     -   id: flake8
 #         args: [--config, ./setup.cfg]
-# -   repo: https://github.com/psf/black
-#     rev: 22.1.0
+# -   repo: https://github.com/PyCQA/isort
+#     rev: 5.10.1
 #     hooks:
-#     -   id: black
+#     -   id: isort
 # -   repo: https://github.com/pre-commit/mirrors-mypy
 #     rev: v0.931
 #     hooks:
 #     -   id: mypy
 #         exclude: '(docs|tests)'
 #         args: [--config, ./setup.cfg]
-# -   repo: https://github.com/PyCQA/isort
-#     rev: 5.10.1
-#     hooks:
-#     -   id: isort
 -   repo: local
     hooks:
-    -   id: flake8
-        name: flake8
-        entry: flake8
-        language: system
-        types: [python]
-        args: [--config, setup.cfg]
     -   id: black
         name: black
         entry: black
         language: system
         types: [python]
         args: [--force-exclude, ignored/]
-    -   id: mypy
-        name: mypy
-        entry: mypy
+    -   id: flake8
+        name: flake8
+        entry: flake8
         language: system
         types: [python]
         args: [--config, setup.cfg]
@@ -54,6 +48,12 @@ repos:
         entry: isort
         language: system
         types: [python]
+    -   id: mypy
+        name: mypy
+        entry: mypy
+        language: system
+        types: [python]
+        args: [--config, setup.cfg]
     -   id: pytest
         name: pytest
         entry: pytest
