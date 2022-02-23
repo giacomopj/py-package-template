@@ -21,7 +21,7 @@ Bin
 This folder is meant to contain executable binary files.
 
 Data
----
+----
 
 This folder is meant to contain data files.
 
@@ -44,6 +44,7 @@ Resources
 ---------
 
 This folder is meant to contain relevant files such as:
+
 - Images
 - Spreadsheets
 - Presentations
@@ -55,6 +56,7 @@ Scripts
 -------
 
 This folder is meant to contain scripts for:
+
 - Generating plots
 - Sorting data files
 - Filtering log files
