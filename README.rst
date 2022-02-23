@@ -4,21 +4,26 @@ py-package-template
 
 This is a template repository for Python packages.
 
-The goal is to have a Python development ecosystem that following best practices:
+It integrates a toolchain to implement a few best practices:
 
-- is modern
-- test-driven
-- enforces
-- commit-safe
-- pre-configuration for VS Code
+- The project has its own virtual environment with specific dependencies fixed with *Poetry*
+- The project uses a local Python version fixed with *pyenv*
+- The code is linted with *Flake8*
+- The code formatting is enforced with *Black*
+- The code is unit-tested with *pytest*
+- The code static-type safety is ensured with *MyPy*
+- All code checks are run on every git commit
+- The project IDE is *VC Code* pre-configured for the toolchain
+
+The goal is to encapsulate a Python ecosystem that encourages test-driven development with uniform style while minimizing bugs.
 
 Requirements
 ============
 
-- Install *pyenv* (Python version manager)
+- Install pyenv
 - Install one or more stable versions of Python with pyenv
-- Install *Poetry* (Python dependency manager)
-- Install *VS Code* (IDE)
+- Install Poetry
+- Install VS Code
 - Install Pylance extension inside VS Code
 
 Setup
