@@ -34,13 +34,13 @@ repos:
     -   id: flake8
         name: flake8
         entry: flake8
-        language: python
+        language: system
         types: [python]
         args: [--config, setup.cfg]
     -   id: black
         name: black
         entry: black
-        language: python
+        language: system
         types: [python]
         args: [--force-exclude, ignored/]
     -   id: mypy
@@ -52,12 +52,11 @@ repos:
     -   id: isort
         name: isort
         entry: isort
-        language: python
+        language: system
         types: [python]
     -   id: pytest
         name: pytest
         entry: pytest
         language: system
-        types: [python]
         pass_filenames: false
         always_run: true
