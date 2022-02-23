@@ -1,0 +1,4 @@
+Data
+====
+
+This folder is intended to contain input data files.

@@ -1,0 +1,9 @@
+Resources
+=========
+
+This folder is intended to contain relevant files such as:
+- Images
+- Spreadsheets
+- Presentations
+- Documents (i.e., manuals, papers, datasheets, etc.)
+- Etc.

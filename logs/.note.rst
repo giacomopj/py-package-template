@@ -1,0 +1,4 @@
+Logs
+====
+
+This folder is intended to contain output log files.

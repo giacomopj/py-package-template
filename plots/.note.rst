@@ -1,0 +1,4 @@
+Plots
+=====
+
+This folder is intended to contain output plots.
