@@ -1,0 +1,7 @@
+Tests
+-----
+
+This folder is meant to contain unit tests.
+
+.. note::
+   The tree of this folder shall reflect that of ../src

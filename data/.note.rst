@@ -1,4 +1,4 @@
 Data
-====
+---
 
-This folder is intended to contain input data files.
+This folder is meant to contain data files.

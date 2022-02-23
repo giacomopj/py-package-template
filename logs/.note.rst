@@ -1,4 +1,4 @@
 Logs
-====
+----
 
-This folder is intended to contain output log files.
+This folder is intended to contain log files.

@@ -1,4 +1,4 @@
 Plots
-=====
+-----
 
-This folder is intended to contain output plots.
+This folder is meant to contain output plots.

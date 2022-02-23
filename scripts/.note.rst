@@ -1,7 +1,8 @@
 Scripts
-=======
+-------
 
-This folder is intended to contain scripts for:
+This folder is meant to contain scripts for:
 - Generating plots
-- Sorting data and log files
+- Sorting data files
+- Filtering log files
 - Etc.

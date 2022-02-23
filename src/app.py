@@ -1,9 +1,10 @@
 def run(name: str = "World") -> int:
-    """This function is the entry point of the application.
-    It essentially greets 'name'.
+    """This function is the entry point of the application program.
+    It essentially greets the string passed as parameter 'name'.
 
     .. note::
-       The entry point could be also a method 'run' of a class 'App'
+       Instead of a function the entry point could be a method 'run'
+       in a class 'App' for instance
 
     :Example:
 
