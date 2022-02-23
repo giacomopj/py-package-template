@@ -27,14 +27,23 @@ Setup
 - Clone this repository
 - Change working directory to the clone resository
 - Set local Python version
+
   ``pyenv local 3.10.x``
+  
 - Use local Python version inside the virtual environment
+
   ``poetry env use python``
+  
 - Install all dependencies for the virtual environment
+
   ``poetry install``
+  
 - Activate the virtual environment
+
   ``poetry shell``
+  
 - Run VS Code from inside the virtual environment
+
   ``code .``
   
 References:
