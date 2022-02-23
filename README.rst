@@ -79,7 +79,7 @@ This folder is meant to contain source code documentation.
 Logs
 ----
 
-This folder is intended to contain log files.
+This folder is meant to contain log files.
 
 Plots
 -----
