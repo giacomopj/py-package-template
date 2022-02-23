@@ -1,4 +1,0 @@
-Data
----
-
-This folder is meant to contain data files.

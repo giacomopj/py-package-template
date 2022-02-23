@@ -1,4 +1,0 @@
-Logs
-----
-
-This folder is intended to contain log files.

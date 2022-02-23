@@ -1,8 +1,0 @@
-Scripts
--------
-
-This folder is meant to contain scripts for:
-- Generating plots
-- Sorting data files
-- Filtering log files
-- Etc.

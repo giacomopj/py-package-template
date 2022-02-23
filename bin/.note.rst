@@ -1,4 +1,0 @@
-Bin
----
-
-This folder is meant to contain executable binary files.

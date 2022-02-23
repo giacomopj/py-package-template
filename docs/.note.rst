@@ -1,4 +1,0 @@
-Docs
-----
-
-This folder is meant to contain source code documentation.

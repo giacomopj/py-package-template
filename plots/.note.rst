@@ -1,4 +1,0 @@
-Plots
------
-
-This folder is meant to contain output plots.
