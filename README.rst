@@ -4,16 +4,48 @@ py-package-template
 
 This is a template repository for Python packages.
 
+The goal is to have a Python development ecosystem that following best practices:
+
+- is modern
+- test-driven
+- enforces
+- commit-safe
+- pre-configuration for VS Code
+
+Requirements
+============
+
+- Install *pyenv* (Python version manager)
+- Install one or more stable versions of Python with pyenv
+- Install *Poetry* (Python dependency manager)
+- Install *VS Code* (IDE)
+- Install Pylance extension inside VS Code
+
 Setup
 =====
 
-Setup.
+- Clone this repository
+- Change working directory to the clone resository
+- Set local Python version
+  ``pyenv local 3.10.x``
+- Use local Python version inside the virtual environment
+  ``poetry env use python``
+- Install all dependencies for the virtual environment
+  ``poetry install``
+- Activate the virtual environment
+  ``poetry shell``
+- Run VS Code from inside the virtual environment
+  ``code .``
+  
+References:
+
+* https://cookiecutter-hypermodern-python.readthedocs.io/en/2020.11.15/guide.html#how-to-run-your-code
+* https://mitelman.engineering/blog/python-best-practice/automating-python-best-practices-for-a-new-project/#why-run-checks-before-commit
 
 Folder tree
 ===========
 
 Files in the root directory are only for configuration.
-The folders organize the rest of the files as follows.
 
 Bin
 ---
