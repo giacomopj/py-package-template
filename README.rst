@@ -12,7 +12,7 @@ It integrates a toolchain to implement a few best practices:
 - The code formatting is enforced with *Black*
 - The code is unit-tested with *pytest*
 - The code static-type safety is ensured with *MyPy*
-- All code checks are run on every git commit
+- All code checks and unit tests are run on every git commit
 - The project IDE is *VC Code* pre-configured for the toolchain
 
 The goal is to encapsulate a Python ecosystem that encourages test-driven development with uniform style while minimizing bugs.
