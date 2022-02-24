@@ -13,6 +13,7 @@ It integrates a toolchain to implement a few best practices:
 - The code is unit-tested with *pytest*
 - The code static-type safety is ensured with *MyPy*
 - All code checks and unit tests are run on every git commit
+- The coverage of unit tests is checked on every git push
 - The project IDE is *VC Code* pre-configured for the toolchain
 
 The goal is to encapsulate a Python ecosystem that encourages test-driven development with uniform style while minimizing bugs.
@@ -50,6 +51,10 @@ Setup
 - Run all code pre-commit checks
 
   ``pre-commit run --all-files``
+  
+- Run all unit tests and check test coverage
+
+  ``pytest --cov --cov-fail-under=100``
   
 - Run VS Code from inside the virtual environment
 
