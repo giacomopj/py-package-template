@@ -47,6 +47,10 @@ Setup
 
   ``poetry shell``
   
+- Run all code pre-commit checks
+
+  ``pre-commit run --all-files``
+  
 - Run VS Code from inside the virtual environment
 
   ``code .``
