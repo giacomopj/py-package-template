@@ -34,29 +34,42 @@ repos:
     -   id: black
         name: black
         entry: black
+        stages: [commit]
         language: system
         types: [python]
         args: [--force-exclude, ignored/]
     -   id: flake8
         name: flake8
         entry: flake8
+        stages: [commit]
         language: system
         types: [python]
         args: [--config, setup.cfg]
     -   id: isort
         name: isort
         entry: isort
+        stages: [commit]
         language: system
         types: [python]
     -   id: mypy
         name: mypy
         entry: mypy
+        stages: [commit]
         language: system
         types: [python]
         args: [--config, setup.cfg]
+        pass_filenames: false
     -   id: pytest
         name: pytest
         entry: pytest
+        stages: [commit]
         language: system
-        pass_filenames: false
+        types: [python]
         always_run: true
+    -   id: pytest-cov
+        name: pytest-cov
+        entry: pytest --cov --cov-fail-under=100
+        stages: [push]
+        language: system
+        types: [python]
+        pass_filenames: false
