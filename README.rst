@@ -45,8 +45,6 @@ Setup
   
   * and cancel the commit history::
   
-    .. code-block::
-    
       cd <mynewrepo>
       git rm -rf .git
       git init .
@@ -73,8 +71,8 @@ Setup
   
 - Set pre-commit and pre-push hooks::
 
-  pipenv run pre-commit install -t pre-commit
-  pipenv run pre-commit install -t pre-push
+      pipenv run pre-commit install -t pre-commit
+      pipenv run pre-commit install -t pre-push
   
 - Run all code pre-commit checks
 
