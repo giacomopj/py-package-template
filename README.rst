@@ -53,9 +53,9 @@ Setup
       git commit -m "First commit"
       git push -u origin master
 
-- Set local Python version::
+- Set local Python version x.x.x::
 
-      pyenv local 3.10.x
+      pyenv local x.x.x
   
 - Use local Python version inside the virtual environment::
 
