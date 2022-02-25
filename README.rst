@@ -37,21 +37,23 @@ Setup
 
   git clone https://github.com/giacomopj/py-package-template.git <mynewrepo>
 
-  * and keep the commit history ::
+  * and keep the commit history::
   
     cd <mynewrepo>
     git remote set-url origin </url/of/my/new/repo>
     git push -u origin master
   
-  * and cancel the commit history ::
+  * and cancel the commit history::
   
-    cd <mynewrepo>
-    git rm -rf .git
-    git init .
-    git remote set-url origin </url/of/my/new/repo>
-    git add .
-    git commit -m "First commit"
-    git push -u origin master
+    .. code-block::
+    
+      cd <mynewrepo>
+      git rm -rf .git
+      git init .
+      git remote set-url origin </url/of/my/new/repo>
+      git add .
+      git commit -m "First commit"
+      git push -u origin master
 
 - Set local Python version
 
