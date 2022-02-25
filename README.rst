@@ -14,7 +14,7 @@ It integrates a toolchain to implement a few best practices:
 - The code static-type safety is ensured with *MyPy*
 - Code checks are hooked to every git commit
 - Unit tests and test coverage check are hooked to every git push
-- The project IDE is *VC Code* pre-configured for the toolchain
+- The project IDE is *VS Code* pre-configured for the toolchain
 
 The goal is to encapsulate a Python ecosystem that encourages test-driven development with uniform style while minimizing bugs.
 
