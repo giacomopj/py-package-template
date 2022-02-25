@@ -12,8 +12,8 @@ It integrates a toolchain to implement a few best practices:
 - The code formatting is enforced with *Black*
 - The code is unit-tested with *pytest*
 - The code static-type safety is ensured with *MyPy*
-- All code checks and unit tests are run on every git commit
-- The coverage of unit tests is checked on every git push
+- Code checks are hooked to every git commit
+- Unit tests and test coverage check are hooked to every git push
 - The project IDE is *VC Code* pre-configured for the toolchain
 
 The goal is to encapsulate a Python ecosystem that encourages test-driven development with uniform style while minimizing bugs.
@@ -47,6 +47,11 @@ Setup
 - Activate the virtual environment
 
   ``poetry shell``
+  
+- Set pre-commit and pre-push hooks
+
+  ``pipenv run pre-commit install -t pre-commit``
+  ``pipenv run pre-commit install -t pre-push``
   
 - Run all code pre-commit checks
 
