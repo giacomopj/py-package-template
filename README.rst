@@ -152,11 +152,11 @@ This folder is meant to contain the source code of one or more modules or a pack
 
  > A Python package
  
-   * is a collection of modules organized in a folder
-     that contains __init__.py
-   * can be made of multiple sub-packages
-   * can be made executable as a script by providing __main__.py
-    which imports the package as a module
+ * is a collection of modules organized in a folder
+   that contains __init__.py
+ * can be made of multiple sub-packages
+ * can be made executable as a script by providing __main__.py
+   which imports the package as a module
 
  > A Python library is a collection of packages
 
