@@ -67,7 +67,7 @@ Setup
   
 - Activate the virtual environment::
 
-      poetry shell``
+      poetry shell
   
 - Set pre-commit and pre-push hooks::
 
