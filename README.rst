@@ -39,9 +39,9 @@ Setup
 
   * and keep the commit history::
   
-    cd <mynewrepo>
-    git remote set-url origin </url/of/my/new/repo>
-    git push -u origin master
+        cd <mynewrepo>
+        git remote set-url origin </url/of/my/new/repo>
+        git push -u origin master
   
   * and cancel the commit history::
   
@@ -53,9 +53,9 @@ Setup
       git commit -m "First commit"
       git push -u origin master
 
-- Set local Python version
+- Set local Python version::
 
-  ``pyenv local 3.10.x``
+  pyenv local 3.10.x
   
 - Use local Python version inside the virtual environment
 
