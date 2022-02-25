@@ -55,7 +55,7 @@ Setup
 
 - Set local Python version::
 
-  pyenv local 3.10.x
+  "pyenv local 3.10.x"
   
 - Use local Python version inside the virtual environment
 
