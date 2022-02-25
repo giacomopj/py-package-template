@@ -148,23 +148,20 @@ Src
 
 This folder is meant to contain the source code of one or more modules or a package ore a library.
 
-.. note::
-   Python modules are executable .py scripts
+> Python modules are executable .py scripts
 
-   A Python package
+> A Python package
+  * is a collection of modules organized in a folder
+    that contains __init__.py
+  * can be made of multiple sub-packages
+  * can be made executable as a script by providing __main__.py
+    which imports the package as a module
 
-   * is a collection of modules organized in a folder
-     that contains __init__.py
-   * can be made of multiple sub-packages
-   * can be made executable as a script by providing __main__.py
-     which imports the package as a module
-
-   A Python library is a collection of packages
+> A Python library is a collection of packages
 
 Tests
 -----
 
 This folder is meant to contain unit tests.
 
-.. note::
-   The tree of this folder shall reflect that of the source code
+> The tree of this folder shall reflect that of the source code
