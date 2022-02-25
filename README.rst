@@ -33,9 +33,9 @@ Setup
 
 - Create a new empty repository named <mynewrepo> at </url/of/my/new/repo>
 
-- Run the following commands to clone the template repository
+- Run the following commands to clone the template repository::
 
-  git clone https://github.com/giacomopj/py-package-template.git <mynewrepo>
+      git clone https://github.com/giacomopj/py-package-template.git <mynewrepo>
 
   * and keep the commit history::
   
@@ -55,36 +55,36 @@ Setup
 
 - Set local Python version::
 
-  "pyenv local 3.10.x"
+      pyenv local 3.10.x
   
-- Use local Python version inside the virtual environment
+- Use local Python version inside the virtual environment::
 
-  ``poetry env use python``
+      poetry env use python
   
-- Install all dependencies for the virtual environment
+- Install all dependencies for the virtual environment::
 
-  ``poetry install``
+      poetry install
   
-- Activate the virtual environment
+- Activate the virtual environment::
 
-  ``poetry shell``
+      poetry shell``
   
 - Set pre-commit and pre-push hooks::
 
       pipenv run pre-commit install -t pre-commit
       pipenv run pre-commit install -t pre-push
   
-- Run all code pre-commit checks
+- Run all code pre-commit checks::
 
-  ``pre-commit run --all-files``
+      pre-commit run --all-files
   
-- Run all unit tests and check test coverage
+- Run all unit tests and check test coverage::
 
-  ``pytest --cov --cov-fail-under=100``
+      pytest --cov --cov-fail-under=100
   
-- Run VS Code from inside the virtual environment
+- Run VS Code from inside the virtual environment::
 
-  ``code .``
+      code .
   
 References:
 
