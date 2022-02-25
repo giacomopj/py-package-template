@@ -151,6 +151,7 @@ This folder is meant to contain the source code of one or more modules or a pack
  > Python modules are executable .py scripts
 
  > A Python package
+ 
    * is a collection of modules organized in a folder
      that contains __init__.py
    * can be made of multiple sub-packages
@@ -164,4 +165,4 @@ Tests
 
 This folder is meant to contain unit tests.
 
-> The tree of this folder shall reflect that of the source code
+ > The tree of this folder shall reflect that of the source code
