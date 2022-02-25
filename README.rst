@@ -72,8 +72,8 @@ Setup
   
 - Set pre-commit and pre-push hooks::
 
-      pipenv run pre-commit install -t pre-commit
-      pipenv run pre-commit install -t pre-push
+      pre-commit install -t pre-commit
+      pre-commit install -t pre-push
   
 - Run all code pre-commit checks::
 
