@@ -64,6 +64,7 @@ Setup
 - Install all dependencies for the virtual environment::
 
       poetry install
+      poetry update
   
 - Activate the virtual environment::
 
