@@ -7,7 +7,7 @@ This is a template repository for Python packages.
 It integrates a toolchain to implement a few best practices:
 
 - The project has its own virtual environment with specific dependencies fixed with *Poetry*
-- The project uses a local Python version fixed with *pyenv*
+- The project uses a local Python version fixed with *Pyenv*
 - The code is linted with *Flake8*
 - The code formatting is enforced with *Black*
 - The code is unit-tested with *pytest*
@@ -21,8 +21,9 @@ The goal is to encapsulate a Python ecosystem that encourages test-driven develo
 Requirements
 ============
 
-- Install pyenv
-- Install one or more stable versions of Python with pyenv
+- Install Git
+- Install Pyenv
+- Install one or more stable versions of Python with Pyenv
 - Install Poetry
 - Install VS Code
 - Install Pylance extension inside VS Code
@@ -30,8 +31,28 @@ Requirements
 Setup
 =====
 
-- Clone this repository
-- Change working directory to the clone resository
+- Create a new empty repository named <mynewrepo> at </url/of/my/new/repo>
+
+- Run the following commands to clone the template repository
+
+  git clone https://github.com/giacomopj/py-package-template.git <mynewrepo>
+
+  * and keep the commit history ::
+  
+    cd <mynewrepo>
+    git remote set-url origin </url/of/my/new/repo>
+    git push -u origin master
+  
+  * and cancel the commit history ::
+  
+    cd <mynewrepo>
+    git rm -rf .git
+    git init .
+    git remote set-url origin </url/of/my/new/repo>
+    git add .
+    git commit -m "First commit"
+    git push -u origin master
+
 - Set local Python version
 
   ``pyenv local 3.10.x``
@@ -48,10 +69,10 @@ Setup
 
   ``poetry shell``
   
-- Set pre-commit and pre-push hooks
+- Set pre-commit and pre-push hooks::
 
-  ``pipenv run pre-commit install -t pre-commit``
-  ``pipenv run pre-commit install -t pre-push``
+  pipenv run pre-commit install -t pre-commit
+  pipenv run pre-commit install -t pre-push
   
 - Run all code pre-commit checks
 
