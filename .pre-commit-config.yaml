@@ -62,7 +62,7 @@ repos:
     -   id: pytest
         name: pytest
         entry: pytest
-        stages: [commit]
+        stages: [push]
         language: system
         types: [python]
         always_run: true
