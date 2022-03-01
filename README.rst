@@ -38,13 +38,13 @@ Setup
       git clone https://github.com/giacomopj/py-package-template.git <mynewrepo>
 
   * and keep the commit history::
-  
+
         cd <mynewrepo>
         git remote set-url origin </url/of/my/new/repo>
         git push -u origin master
-  
+
   * and cancel the commit history::
-  
+
       cd <mynewrepo>
       git rm -rf .git
       git init .
@@ -56,37 +56,37 @@ Setup
 - Set local Python version x.x.x::
 
       pyenv local x.x.x
-  
+
 - Use local Python version inside the virtual environment::
 
       poetry env use python
-  
+
 - Install all dependencies for the virtual environment::
 
       poetry install
       poetry update
-  
+
 - Activate the virtual environment::
 
       poetry shell
-  
+
 - Set pre-commit and pre-push hooks::
 
       pre-commit install -t pre-commit
       pre-commit install -t pre-push
-  
+
 - Run all code pre-commit checks::
 
       pre-commit run --all-files
-  
+
 - Run all unit tests and check test coverage::
 
       pytest --cov --cov-fail-under=100
-  
+
 - Run VS Code from inside the virtual environment::
 
       code .
-  
+
 References:
 
 * https://cookiecutter-hypermodern-python.readthedocs.io/en/2020.11.15/guide.html#how-to-run-your-code
@@ -152,7 +152,7 @@ This folder is meant to contain the source code of one or more modules or a pack
  > Python modules are executable .py scripts
 
  > A Python package
- 
+
  * is a collection of modules organized in a folder
    that contains __init__.py
  * can be made of multiple sub-packages

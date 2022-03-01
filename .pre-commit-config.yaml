@@ -53,11 +53,12 @@ repos:
         types: [python]
     -   id: mypy
         name: mypy
-        entry: mypy
+        entry: mypy ./
         stages: [commit]
         language: system
         types: [python]
         args: [--config, setup.cfg]
+        require_serial: true
         pass_filenames: false
     -   id: pytest
         name: pytest
