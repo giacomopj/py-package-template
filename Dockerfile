@@ -1,61 +1,82 @@
-# Get input parameters outside image
+# Get input Python version for base image
 ARG PYTHON_VERSION=3.10.2
 
 # Set base image
-FROM python:${PYTHON_VERSION}-slim
+FROM python:${PYTHON_VERSION}-slim as base
+LABEL maintainer="Giacomo Pojani < giacomo.pj@hotmail.it>"
 
-# Get input parameters inside image
-ARG TAG
-ARG USER=developer
+# Get input parameters
+# CONTEXT defines the stage environment (e.g., development, production)
+# USER_NAME defines user name
+# POETRY_VERSION defines Poetry version
+ARG CONTEXT=development
+ARG USER_NAME=developer
 ARG POETRY_VERSION=1.1.13
 
 # Set environment variables
-ENV TAG=$TAG \
-    # Python flags
+ENV CONTEXT=$CONTEXT \
+    # Python variables
     PYTHONFAULTHANDLER=1 \
     PYTHONUNBUFFERED=1 \
     PYTHONHASHSEED=random \
-    # Pip flags
+    # Pip variables
     PIP_NO_CACHE_DIR=off \
     PIP_DISABLE_PIP_VERSION_CHECK=on \
     PIP_DEFAULT_TIMEOUT=100 \
-    # Poetry flags
+    # Poetry variables
     POETRY_VERSION=${POETRY_VERSION} \
     POETRY_VIRTUALENVS_CREATE=false \
-    POETRY_CACHE_DIR='/var/cache/pypoetry'
+    POETRY_HOME="/opt/poetry" \
+    # POETRY_CACHE_DIR='/var/cache/pypoetry' \
+    POETRY_NO_INTERACTION=1 \
+    # Application variables
+    APP_PATH="/opt/app"
 
-RUN apt-get update
-RUN apt-get install -y gcc
-RUN apt-get -y install git
-RUN pip3 install setuptools
+# Prepend Poetry and virtual environment paths
+ENV PATH="${POETRY_HOME}/bin:${PATH}"
+
+# Install system dependencies for base image
+RUN apt-get update && \
+    apt-get upgrade -y && \
+    apt-get install --no-install-recommends && \
+    apt-get install -y gcc && \
+    apt-get install -y git && \
+    pip3 install pip wheel setuptools
 
 # Install Poetry
 RUN pip3 install poetry==${POETRY_VERSION}
-ENV PATH="${PATH}:/root/.poetry/bin"
 
-# Set working directory
-WORKDIR /app
+# Set application path as working directory
+WORKDIR $APP_PATH
 
-# Copy dependencies to the working directory
-COPY pyproject.toml poetry.lock .
+# Copy list of dependencies into the working directory
+COPY pyproject.toml poetry.lock ./
 
 # Disable virtual environment creation
 RUN poetry config virtualenvs.create false
 
-# Install dependencies
-RUN poetry install --no-root
-RUN poetry update
+# Update versions of the dependencies (if needed)
+# --lock Only update .lock file without installing
+RUN poetry update $(test "$CONTEXT" == production && echo "--no-dev") --lock
 
-# Copy everything to the working directory
-COPY . .
+# Install dependencies
+# --no-root Set installation to regular mode instead of editable mode
+# --no-interaction Turn off interactive questions
+# --no-ansi Disable ANSI output
+RUN poetry install $(test "$CONTEXT" == production && echo "--no-dev") --no-interaction --no-ansi --no-root
+
+# Copy all files
+COPY . ./
 
 # Set pre-commit and pre-push hooks
-RUN pre-commit install -t pre-commit
-RUN pre-commit install -t pre-push
+RUN pre-commit install -t pre-commit && \
+    pre-commit install -t pre-push
+
+# Grant execution permission to start-up script
+RUN chmod +x ./scripts/start.sh
 
 # Set entry point (if needed)
 # ENTRYPOINT python -m src
 
 # Execute script at container start-up
-RUN chmod +x ./scripts/start.sh
 CMD ["./scripts/start.sh"]
