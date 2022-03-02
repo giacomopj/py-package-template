@@ -1,0 +1,9 @@
+# CSV files except the ones starting with TEST
+*.csv
+!TEST*.csv
+
+# ReStructuredText files except README, index, and example
+*.rst
+!README.rst
+!index.rst
+!example.rst
