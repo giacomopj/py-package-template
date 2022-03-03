@@ -9,7 +9,8 @@ The goal is to encapsulate a Python development ecosystem that encourages test-d
 Python is an interpreted language. Building Python packages deos not necessarily involve compiling, which can be computationally intensive. Therefore, continuous integration can be carried out locally, either on a local machine or in a Docker container. In here, a pipeline goes automatically through a series of checks and unit tests before commiting or pushing code to the remote repository.
 
 The build system orchestrates the several tools for continuous integration.
-This development ecosystem in this repository comprises the following toolchain:
+
+The development ecosystem in this repository comprises the following toolchain:
 
 - The project dependencies are managed with *Poetry*
 - The project Python version is managed with *Pyenv* (*)
@@ -24,6 +25,7 @@ This development ecosystem in this repository comprises the following toolchain:
 - The project IDE is *VS Code* pre-configured for the whole toolchain
 
 (*) Not used in the Docker container, whose image is tied to the Python version passed as parameter (i.e., 3.10.2 by default)
+
 (**) The pipeline is configured so that it does not break if the static checkers fails
 
 Repository Setup
