@@ -2,7 +2,7 @@
 ARG PYTHON_VERSION=3.10.2
 
 # Set base image
-FROM python:${PYTHON_VERSION}-slim as base
+FROM python:${PYTHON_VERSION}-slim AS base
 LABEL maintainer="Giacomo Pojani < giacomo.pj@hotmail.it>"
 
 # Get input parameters
@@ -16,9 +16,11 @@ ARG POETRY_VERSION=1.1.13
 # Set environment variables
 ENV CONTEXT=$CONTEXT \
     # Python variables
+    PYTHONDONTWRITEBYTECODE=1 \
     PYTHONFAULTHANDLER=1 \
     PYTHONUNBUFFERED=1 \
     PYTHONHASHSEED=random \
+    PYTHONPATH="${PYTHONPATH}:/opt/app" \
     # Pip variables
     PIP_NO_CACHE_DIR=off \
     PIP_DISABLE_PIP_VERSION_CHECK=on \
@@ -66,17 +68,40 @@ RUN poetry update $(test "$CONTEXT" == production && echo "--no-dev") --lock
 RUN poetry install $(test "$CONTEXT" == production && echo "--no-dev") --no-interaction --no-ansi --no-root
 
 # Copy all files
-COPY . ./
+COPY . .
 
 # Set pre-commit and pre-push hooks
 RUN pre-commit install -t pre-commit && \
     pre-commit install -t pre-push
 
+# ---
+
+# Set debuger image
+FROM base AS debugger
+
+# Install debugger dependency
+RUN poetry add debugpy
+
+# Expose port of debugger
+EXPOSE 5678
+
+# Set debugger as entry point
+ENTRYPOINT [ "python", "-m", "debugpy", "--listen", "0.0.0.0:5678", "--wait-for-client", "-m" ]
+
+# ---
+
+# Set runner image
+FROM base AS runner
+
+ENTRYPOINT [ "python", "-m", "src"]
+
+# ---
+
+# Set tester image
+FROM base AS tester
+
 # Grant execution permission to start-up script
 RUN chmod +x ./scripts/start.sh
-
-# Set entry point (if needed)
-# ENTRYPOINT python -m src
 
 # Execute script at container start-up
 CMD ["./scripts/start.sh"]

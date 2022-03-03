@@ -53,24 +53,25 @@ repos:
         types: [python]
     -   id: mypy
         name: mypy
-        entry: mypy ./
-        stages: [commit]
+        entry: bash -c 'mypy ./src || true' -- # Check only source code
         language: system
+        stages: [commit]
         types: [python]
         args: [--config, setup.cfg]
         require_serial: true
         pass_filenames: false
+        verbose: true
     -   id: pytest
         name: pytest
         entry: pytest
-        stages: [push]
+        stages: [push] # Only before push
         language: system
         types: [python]
         always_run: true
     -   id: pytest-cov
         name: pytest-cov
         entry: pytest --cov --cov-fail-under=100
-        stages: [push]
+        stages: [push] # Only before push
         language: system
         types: [python]
         pass_filenames: false

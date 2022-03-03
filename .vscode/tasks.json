@@ -1,0 +1,66 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+            "label": "build-debugger",
+            "type": "shell",
+            "command": [
+                "docker build --target=debugger -t debug-app .",
+            ],
+            "problemMatcher": []
+        },
+		{
+            "label": "build-runner",
+            "type": "shell",
+            "command": [
+                "docker build --target=runner -t run-app .",
+            ],
+            "problemMatcher": []
+        },
+		{
+            "label": "build-tester", // Not launched
+            "type": "shell",
+            "command": [
+                "docker build --target=tester -t test-app .",
+            ],
+            "problemMatcher": []
+        },
+		{
+			"label": "run-debugger", // WIP
+			"type": "shell",
+			"dependsOn": [
+				"build-debugger"
+			],
+            "command": [
+                "docker run --rm -it --expose 5678 debug-app",
+            ],
+            "problemMatcher": []
+		},
+		{
+			"type": "docker-run",
+			"label": "docker-run: debugger",
+			"dependsOn": [
+				"build-debugger"
+			],
+			"python": {
+				"args": ["Debugger", "Container"],
+				"file": "src"
+			},
+			"dockerRun": {
+                "image": "debug-app",
+                "containerName": "debug-dev"
+            }
+		},
+		{
+			"label": "run-runner",
+			"type": "shell",
+			"dependsOn": [
+				"build-runner"
+			],
+            "command": [
+                "docker run --rm -it run-app",
+            ],
+            "problemMatcher": []
+		}
+	]
+}

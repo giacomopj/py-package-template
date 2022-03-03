@@ -9,7 +9,7 @@ pre-commit run --all-files
 
 # Run the application executable
 printf "\nRunning application executable with example parameter\n"
-python -m src Container
+python -m src Tester Container
 
 # Run console
 /bin/bash
