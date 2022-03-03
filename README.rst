@@ -4,19 +4,23 @@ py-package-template
 
 This is a template repository for Python packages.
 
-It integrates a toolchain to implement a few best practices:
+It integrates the following toolchain:
 
-- The project has its own virtual environment with specific dependencies fixed with *Poetry*
-- The project uses a local Python version fixed with *Pyenv*
+- The project dependencies are managed with *Poetry*
+- The project Python version is managed with *Pyenv*
 - The code is linted with *Flake8*
 - The code formatting is enforced with *Black*
 - The code is unit-tested with *pytest*
-- The code static-type safety is ensured with *MyPy*
-- Code checks are hooked to every git commit
-- Unit tests and test coverage check are hooked to every git push
-- The project IDE is *VS Code* pre-configured for the toolchain
+- The code type safety is statically ensured with *MyPy*
+- Code documentation can be automatically generated with *Sphinx*
+- Code checks above are hooked to every git commit
+- Unit tests and test coverage checks are hooked to every git push
+- The project is containerized with *Docker* and multi-stage builds
+- The project IDE is *VS Code* pre-configured for whole toolchain
 
-The goal is to encapsulate a Python ecosystem that encourages test-driven development with uniform style while minimizing bugs.
+The goal is to encapsulate a Python ecosystem that encourages test-driven development with uniform style, type safety, and continuous integration.
+
+Unlike other languages, Python does not need a building system, so continuous integration can be performed locally, before committing and/or pushing code to the remote repository.
 
 Requirements
 ============
@@ -81,6 +85,7 @@ Setup
 
 - Run all unit tests and check test coverage::
 
+      pytest
       pytest --cov --cov-fail-under=100
 
 - Run VS Code from inside the virtual environment::
