@@ -20,13 +20,15 @@ The development ecosystem in this repository comprises the following toolchain:
 - The code type safety is statically analysed with *MyPy* (**)
 - Code documentation can be automatically generated with *Sphinx*
 - Code checks above are hooked to every git commit
-- Unit tests and test coverage checks are hooked to every git push
+- Unit tests and test coverage checks are hooked to every git push (***)
 - The project is containerized with *Docker* and multi-stage builds
 - The project IDE is *VS Code* pre-configured for the whole toolchain
 
 (*) Not used in the Docker container, whose image is tied to the Python version passed as parameter (i.e., 3.10.2 by default)
 
-(**) The pipeline is configured so that it does not break if the static checkers fails
+(**) The pipeline is configured so that it does not break if the static checker fails
+
+(***) Unit testing is potentially the most complex stage of the pipeline
 
 Repository Setup
 ================
@@ -70,9 +72,9 @@ The following steps are to install the Python ecosystem on your local machine:
 
 - Setup the repository (see paragraph above)
 
-- Set local Python version x.x.x::
+- Set local Python version <x.x.x> (e.g., 3.10.2)::
 
-      pyenv local x.x.x
+      pyenv local <x.x.x>
 
 - Use local Python version inside the virtual environment::
 
@@ -125,7 +127,7 @@ The following steps are to build the image of the devlopment ecosystem and run i
 
 - Setup the repository (see paragraph above)
 
-A Dockerfile is provided to assemble Docker image, which consists of three stages:
+A Docker file is provided to assemble an image, which consists of three stages:
 
 #. Debugger
 #. Runner
@@ -133,15 +135,24 @@ A Dockerfile is provided to assemble Docker image, which consists of three stage
 
 The stages Debugger and Runner can be build and run into a Docker container from Debug and Run in VS Code:
 
-- Press "Docker Runner" configuration to launch the application
+- Press "Docker Runner" configuration to launch the application (*)
 
-- Press "Docker Debugger" configuration to debug the application
+- Press "Docker Debugger" configuration to debug the application (*)
 
-The stage Tester can be build and run into a Docker container from command line to launch the script /Scripts/start-up.sh (*)::
+The stage Tester can be build and run into a Docker container from command line and it executes the script /Scripts/start-up.sh (**)::
 
-docker build --target=tester -t test-app .
+      docker build --target=tester -t test-app .
+      docker run --rm -it test-app
+      
+(*) They can be built and run also from command line with the optional parameter for the Python version <x.x.x> (i.e., 3.10.2 by default)::
 
-(*) This script now performs all pre-commit and pre-push check, then launches the application and finally gives access to the container root shell
+      docker build --target=runner -t test-app --build-arg PYTHON_VERSION=<x.x.x> .
+      docker run --rm -it run-app
+      
+      docker build --target=debugger -t debug-app --build-arg PYTHON_VERSION=<x.x.x> .
+      docker run --rm -it --expose 5678 debug-app
+
+(**) This sample script performs all pre-commit and pre-push checks, then launches the application, and finally opens the container root shell
 
 References:
 
