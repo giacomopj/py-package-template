@@ -4,7 +4,7 @@ py-package-template
 
 This is a template repository for Python packages.
 
-The goal is to encapsulate a Python development ecosystem that encourages test-driven and continuous code integration with uniform style and type safety.
+The goal is to encapsulate a Python development ecosystem that encourages test-driven and continuous code integration with uniform format and type safety.
 
 Python is an interpreted language. Building Python packages deos not necessarily involve compiling, which can be computationally intensive. Therefore, continuous integration can be carried out locally, either on a local machine or in a Docker container. In here, a pipeline goes automatically through a series of checks and unit tests before commiting or pushing code to the remote repository.
 
@@ -13,22 +13,22 @@ The build system orchestrates the several tools for continuous integration.
 The development ecosystem in this repository comprises the following toolchain:
 
 - The project dependencies are managed with *Poetry*
-- The project Python version is managed with *Pyenv* (*)
+- The project Python version is managed with *Pyenv* (\*)
 - The code is linted with *Flake8*
 - The code formatting is enforced with *Black*
 - The code is unit-tested with *pytest*
-- The code type safety is statically analysed with *MyPy* (**)
-- Code documentation can be automatically generated with *Sphinx*
+- The code type safety is statically analysed with *MyPy* (\*\*)
 - Code checks above are hooked to every git commit
-- Unit tests and test coverage checks are hooked to every git push (***)
+- Unit tests and test coverage checks are hooked to every git push (\*\*\*)
+- Documentation can be automatically generated from the code with *Sphinx*
 - The project is containerized with *Docker* and multi-stage builds
 - The project IDE is *VS Code* pre-configured for the whole toolchain
 
-(*) Not used in the Docker container, whose image is tied to the Python version passed as parameter (i.e., 3.10.2 by default)
+(\*) Not used in the Docker container, whose image is tied to the Python version passed as parameter (i.e., 3.10.2 by default)
 
-(**) The pipeline is configured so that it does not break if the static checker fails
+(\*\*) The pipeline is configured so that it does not break if the static checker fails
 
-(***) Unit testing is potentially the most complex stage of the pipeline
+(\*\*\*) Unit testing is potentially the most complex stage of the pipeline
 
 Repository Setup
 ================
@@ -135,39 +135,45 @@ A Docker file is provided to assemble an image, which consists of three stages:
 
 The stages Debugger and Runner can be build and run into a Docker container from Debug and Run in VS Code:
 
-- Press "Docker Runner" configuration to launch the application (*)
+- Press "Docker Runner" configuration to launch the application (\*)
 
-- Press "Docker Debugger" configuration to debug the application (*)
+- Press "Docker Debugger" configuration to debug the application (\*)
 
-The stage Tester can be build and run into a Docker container from command line and it executes the script /Scripts/start-up.sh (**)::
+The stage Tester can be build and run into a Docker container from command line (\*) and it executes the script /scripts/start-up.sh (\*\*)::
 
-      docker build --target=tester -t test-app .
+      docker build --target=tester -t test-app --build-arg CONTEXT=release .
       docker run --rm -it test-app
       
-(*) They can be built and run also from command line with the optional parameter for the Python version <x.x.x> (i.e., 3.10.2 by default)::
+(\*) All image stages can be built and run from command line::
 
-      docker build --target=runner -t test-app --build-arg PYTHON_VERSION=<x.x.x> .
+      docker build --target=runner -t run-app .
       docker run --rm -it run-app
+      
+    From command line is also possible to specify the Python version <x.x.x> (i.e., 3.10.2 by default)::
       
       docker build --target=debugger -t debug-app --build-arg PYTHON_VERSION=<x.x.x> .
       docker run --rm -it --expose 5678 debug-app
 
-(**) This sample script performs all pre-commit and pre-push checks, then launches the application, and finally opens the container root shell
+(\*\*) This sample script performs all pre-commit and pre-push checks, then launches the application, and finally opens the container root shell
 
 References:
 
 * https://code.visualstudio.com/docs/remote/containers
 
-Development
-===========
+How To
+======
 
-To add a new dependency <newdependency> to the ecosystem::
+How to add a new dependency <newdependency> (e.g., a Python library) to the ecosystem::
 
       poetry add <newdependency>
       git add pyproject.toml
       git commit -m "Added <newdependency>"
       
-Generating code documentation:
+How to generate automatic documentation from the code:
+
+      poetry add <newdependency>
+      git add pyproject.toml
+      git commit -m "Added <newdependency>"
 
 Folder Tree
 ===========
