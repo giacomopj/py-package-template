@@ -4,36 +4,32 @@ py-package-template
 
 This is a template repository for Python packages.
 
-It integrates the following toolchain:
+The goal is to encapsulate a Python development ecosystem that encourages test-driven and continuous code integration with uniform style and type safety.
+
+Python is an interpreted language. Building Python packages deos not necessarily involve compiling, which can be computationally intensive. Therefore, continuous integration can be carried out locally, either on a local machine or in a Docker container. In here, a pipeline goes automatically through a series of checks and unit tests before commiting or pushing code to the remote repository.
+
+The build system orchestrates the several tools for continuous integration.
+This development ecosystem in this repository comprises the following toolchain:
 
 - The project dependencies are managed with *Poetry*
-- The project Python version is managed with *Pyenv*
+- The project Python version is managed with *Pyenv* (*)
 - The code is linted with *Flake8*
 - The code formatting is enforced with *Black*
 - The code is unit-tested with *pytest*
-- The code type safety is statically ensured with *MyPy*
+- The code type safety is statically analysed with *MyPy* (**)
 - Code documentation can be automatically generated with *Sphinx*
 - Code checks above are hooked to every git commit
 - Unit tests and test coverage checks are hooked to every git push
 - The project is containerized with *Docker* and multi-stage builds
-- The project IDE is *VS Code* pre-configured for whole toolchain
+- The project IDE is *VS Code* pre-configured for the whole toolchain
 
-The goal is to encapsulate a Python ecosystem that encourages test-driven development with uniform style, type safety, and continuous integration.
+(*) Not used in the Docker container, whose image is tied to the Python version passed as parameter (i.e., 3.10.2 by default)
+(**) The pipeline is configured so that it does not break if the static checkers fails
 
-Unlike compiled languages, Python does not need a building system. Therefore, continuous integration is performed locally, by performing checks and unit tests before committing and/or pushing code to the remote repository.
+Repository Setup
+================
 
-Requirements
-============
-
-- Install Git
-- Install Pyenv
-- Install one or more stable versions of Python with Pyenv
-- Install Poetry
-- Install VS Code
-- Install Pylance extension inside VS Code
-
-Setup
-=====
+The following steps are to create a new repository from this template:
 
 - Create a new empty repository named <mynewrepo> at </url/of/my/new/repo>
 
@@ -57,6 +53,21 @@ Setup
       git commit -m "First commit"
       git push -u origin master
 
+Local Installation
+==================
+
+The following steps are to install the Python ecosystem on your local machine:
+
+- Install Git
+
+- Install Pyenv and one or more stable versions of Python with Pyenv
+
+- Install Poetry
+
+- Install VS Code with Pylance extension
+
+- Setup the repository (see paragraph above)
+
 - Set local Python version x.x.x::
 
       pyenv local x.x.x
@@ -79,25 +90,73 @@ Setup
       pre-commit install -t pre-commit
       pre-commit install -t pre-push
 
-- Run all code pre-commit checks::
+- Run all code pre-commit checks (optional)::
 
       pre-commit run --all-files
 
-- Run all unit tests and check test coverage::
+- Run all unit tests and check test coverage (optional)::
 
       pytest
       pytest --cov --cov-fail-under=100
 
-- Run VS Code from inside the virtual environment::
+- Run VS Code from inside the virtual environment (optional)::
 
       code .
+      
+- Press "Local Runner" from Debug and Run to launch the application (optional)
 
 References:
 
 * https://cookiecutter-hypermodern-python.readthedocs.io/en/2020.11.15/guide.html#how-to-run-your-code
 * https://mitelman.engineering/blog/python-best-practice/automating-python-best-practices-for-a-new-project/#why-run-checks-before-commit
 
-Folder tree
+Container Installation
+======================
+
+The following steps are to build the image of the devlopment ecosystem and run it inside one or more Docker containers:
+
+- Install Git
+
+- Install Docker
+
+- Install VS Code with Pylance and Docker extensions
+
+- Setup the repository (see paragraph above)
+
+A Dockerfile is provided to assemble Docker image, which consists of three stages:
+
+#. Debugger
+#. Runner
+#. Tester
+
+The stages Debugger and Runner can be build and run into a Docker container from Debug and Run in VS Code:
+
+- Press "Docker Runner" configuration to launch the application
+
+- Press "Docker Debugger" configuration to debug the application
+
+The stage Tester can be build and run into a Docker container from command line to launch the script /Scripts/start-up.sh (*)::
+
+docker build --target=tester -t test-app .
+
+(*) This script now performs all pre-commit and pre-push check, then launches the application and finally gives access to the container root shell
+
+References:
+
+* https://code.visualstudio.com/docs/remote/containers
+
+Development
+===========
+
+To add a new dependency <newdependency> to the ecosystem::
+
+      poetry add <newdependency>
+      git add pyproject.toml
+      git commit -m "Added <newdependency>"
+      
+Generating code documentation:
+
+Folder Tree
 ===========
 
 Files in the root directory are only for configuration.
@@ -171,4 +230,4 @@ Tests
 
 This folder is meant to contain unit tests.
 
- > The tree of this folder shall reflect that of the source code
+ > The tree of this folder shall mirror that of the source code
