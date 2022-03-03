@@ -20,7 +20,7 @@ It integrates the following toolchain:
 
 The goal is to encapsulate a Python ecosystem that encourages test-driven development with uniform style, type safety, and continuous integration.
 
-Unlike other languages, Python does not need a building system, so continuous integration can be performed locally, before committing and/or pushing code to the remote repository.
+Unlike compiled languages, Python does not need a building system. Therefore, continuous integration is performed locally, by performing checks and unit tests before committing and/or pushing code to the remote repository.
 
 Requirements
 ============
