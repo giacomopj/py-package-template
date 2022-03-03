@@ -13,7 +13,7 @@ pytest
 pytest --cov --cov-fail-under=100
 
 # Run the application executable
-printf "\nRunning application executable with example parameter\n"
+printf "\nRunning application executable\n"
 python -m src Tester Container
 
 # Run console
