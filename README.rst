@@ -163,23 +163,23 @@ References:
 How To
 ======
 
-How to add a new dependency <newdependency> (e.g., a Python library) to the ecosystem::
+- How to add a new dependency <newdependency> (e.g., a Python library) to the ecosystem::
 
       poetry add <newdependency>
       git add pyproject.toml
       git commit -m "Added <newdependency>"
       
-How to generate automatic documentation from the code in a specific format <myformat> (e.g. html)::
+- How to generate automatic documentation from the code in a specific format <myformat> (e.g. html) (\*)::
 
-      sphinx-build -b html src/ docs/<myformat>/ (\*)
+      sphinx-build -b html src/ docs/<myformat>/
 
-(\*) If not possible in the local machine, this command shall be excuted within the container for the Tester stage
+  (\*) If not possible in the local machine, this command shall be excuted within the container for the Tester stage
 
-How to erase all Docker containers and images::
+- How to erase all Docker containers and images::
 
       docker system prune -a
 
-How to erase all dangling images::
+- How to erase all dangling images::
 
       docker rmi -f $(docker images -qa -f 'dangling=true')
 
