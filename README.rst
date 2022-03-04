@@ -183,13 +183,13 @@ How To
 
   (\*) If it is not executable from the local OS, this command shall be excuted within the Docker container for the Tester stage
 
-- How to erase all Docker containers and images not in use::
+- How to cleanup unused images and dangling ones::
 
       docker system prune -a
 
-- How to erase all dangling images::
+- How to cleanup dangling images::
 
-      docker rmi -f $(docker images -qa -f 'dangling=true')
+      docker image prune
 
 Folder Tree
 ===========
