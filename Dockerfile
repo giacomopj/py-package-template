@@ -15,35 +15,35 @@ ARG POETRY_VERSION=1.1.13
 
 # Set environment variables
 ENV CONTEXT=$CONTEXT \
-    # Python variables
-    PYTHONDONTWRITEBYTECODE=1 \
-    PYTHONFAULTHANDLER=1 \
-    PYTHONUNBUFFERED=1 \
-    PYTHONHASHSEED=random \
-    PYTHONPATH="${PYTHONPATH}:/opt/app" \
-    # Pip variables
-    PIP_NO_CACHE_DIR=off \
-    PIP_DISABLE_PIP_VERSION_CHECK=on \
-    PIP_DEFAULT_TIMEOUT=100 \
-    # Poetry variables
-    POETRY_VERSION=${POETRY_VERSION} \
-    POETRY_VIRTUALENVS_CREATE=false \
-    POETRY_HOME="/opt/poetry" \
-    # POETRY_CACHE_DIR='/var/cache/pypoetry' \
-    POETRY_NO_INTERACTION=1 \
-    # Application variables
-    APP_PATH="/opt/app"
+# Python variables
+PYTHONDONTWRITEBYTECODE=1 \
+PYTHONFAULTHANDLER=1 \
+PYTHONUNBUFFERED=1 \
+PYTHONHASHSEED=random \
+PYTHONPATH="${PYTHONPATH}:/opt/app" \
+# Pip variables
+PIP_NO_CACHE_DIR=off \
+PIP_DISABLE_PIP_VERSION_CHECK=on \
+PIP_DEFAULT_TIMEOUT=100 \
+# Poetry variables
+POETRY_VERSION=${POETRY_VERSION} \
+POETRY_VIRTUALENVS_CREATE=false \
+POETRY_HOME="/opt/poetry" \
+# POETRY_CACHE_DIR='/var/cache/pypoetry' \
+POETRY_NO_INTERACTION=1 \
+# Application variables
+APP_PATH="/opt/app"
 
 # Prepend Poetry and virtual environment paths
 ENV PATH="${POETRY_HOME}/bin:${PATH}"
 
 # Install system dependencies for base image
 RUN apt-get update && \
-    apt-get upgrade -y && \
-    apt-get install --no-install-recommends && \
-    apt-get install -y gcc && \
-    apt-get install -y git && \
-    pip3 install pip wheel setuptools
+apt-get upgrade -y && \
+apt-get install --no-install-recommends && \
+apt-get install -y gcc && \
+apt-get install -y git && \
+pip3 install pip wheel setuptools
 
 # Install Poetry
 RUN pip3 install poetry==${POETRY_VERSION}
@@ -71,16 +71,14 @@ RUN poetry install $(test "$CONTEXT" != test && echo "--no-dev") --no-interactio
 COPY . .
 
 # Set pre-commit and pre-push hooks
-RUN pre-commit install -t pre-commit && \
-    pre-commit install -t pre-push
+RUN if [ "$CONTEXT" == test ] ; then \
+pre-commit install -t pre-commit && \
+pre-commit install -t pre-push ; fi
 
 # ---
 
 # Set debuger image
 FROM base AS debugger
-
-# Install debugger dependency
-RUN poetry add debugpy
 
 # Expose port of debugger
 EXPOSE 5678
