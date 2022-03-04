@@ -1,7 +1,6 @@
-# CSV files except TEST* ones
-*.csv
-!TEST*.csv
-
-# ReStructuredText files except README
+# ReStructuredText files except README in root directory
 *.rst
 !README.rst
+
+# Executable files in all sub-directory levels
+**/*.exe

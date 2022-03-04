@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Exit immediately if a command exits with a non-zero status
-set -e
+# Exit immediately if a command exits with a non-zero status (very restritive)
+# set -e
 
 # Run all code pre-commit checks
 printf "\nRunning code pre-commit checks\n"
