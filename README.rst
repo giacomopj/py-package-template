@@ -26,7 +26,7 @@ The development ecosystem in this repository comprises the following toolchain:
 
 (\*) Not used in the Docker container, whose image is tied to the Python version passed as parameter (i.e., 3.10.2 by default)
 
-(\*\*) The static checker is configuired to warn about wrong or unspecified types, but it does not throw errors what would break the pipeline
+(\*\*) The static checker is configured to return errors as warnings, so that it does not break the pipeline
 
 (\*\*\*) Unit testing can be the most complex stage of the pipeline and, thus, it might be too intensive to repeat at every commit
 
