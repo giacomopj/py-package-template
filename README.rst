@@ -171,7 +171,7 @@ How To
       
 - How to generate automatic documentation from the code in a specific format <myformat> (e.g. html) (\*)::
 
-      sphinx-build -b html src/ docs/<myformat>/
+      sphinx-build -b <myformat> src/ docs/<myformat>/
 
   (\*) If not possible inside the local machine, this command shall be excuted within the container for the Tester stage
 
