@@ -146,13 +146,13 @@ The stage Tester can be build and run into a Docker container from command line 
       
 (\*) All image stages can be built and run from command line::
 
-         docker build --target=runner -t run-app .
-         docker run --rm -it run-app
+    docker build --target=runner -t run-app .
+    docker run --rm -it run-app
       
-     From command line is also possible to pass the Python version <x.x.x> (i.e., 3.10.2 by default) as a parameter::
+From command line is also possible to pass the Python version <x.x.x> (i.e., 3.10.2 by default) as a parameter::
       
-         docker build --target=debugger -t debug-app --build-arg PYTHON_VERSION=<x.x.x> .
-         docker run --rm -it --expose 5678 debug-app
+    docker build --target=debugger -t debug-app --build-arg PYTHON_VERSION=<x.x.x> .
+    docker run --rm -it --expose 5678 debug-app
 
 (\*\*) This sample script performs all pre-commit and pre-push checks, launches the application, and opens the container root shell for testing purposes
 
