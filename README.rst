@@ -175,7 +175,7 @@ How To
 
   (\*) If not possible inside the local machine, this command shall be excuted within the container for the Tester stage
 
-- How to erase all Docker containers and images::
+- How to erase all Docker containers and images not in use::
 
       docker system prune -a
 
