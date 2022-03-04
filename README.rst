@@ -6,7 +6,7 @@ This is a template repository for Python packages.
 
 The goal is to encapsulate a Python development ecosystem that encourages test-driven and continuous code integration with uniform format and type safety.
 
-Python is an interpreted language. Building Python packages deos not necessarily involve compiling, which can be computationally intensive. Therefore, continuous integration can be carried out locally, either on a local machine or in a Docker container. In here, a pipeline goes automatically through a series of checks and unit tests before commiting or pushing code to the remote repository.
+Python is an interpreted language. Building Python packages deos not necessarily involve compiling, which can be computationally intensive. Therefore, continuous integration can be carried out locally, either in the local OS or in a Linux-based Docker container. In here, a pipeline goes automatically through a series of checks and unit tests before commiting or pushing code to the remote repository.
 
 The build system orchestrates the several tools for continuous integration.
 
@@ -56,11 +56,18 @@ The following steps are to create a new repository from this template:
       git add .
       git commit -m "First commit"
       git push -u origin master
+      
+Installation
+============
 
-Local Installation
-==================
+The toolchain of the Python echosystem can be installed (within a virtual environment) in your local OS or in a Docker container or, preferably, in both.
+On the one hand, it is more covenient to have the continuous integration pipeline automatically executed at every git commit or push from your local OS.
+On the other hand, the Docker container can be used to run and debug the application in Linux.
 
-The following steps are to install the Python ecosystem on your local machine:
+Local OS Installation
+---------------------
+
+The following steps are to install the Python ecosystem in your local OS:
 
 - Install Git
 
@@ -72,11 +79,11 @@ The following steps are to install the Python ecosystem on your local machine:
 
 - Setup the repository (see Repository Setup)
 
-- Set local Python version <x.x.x> (e.g., 3.10.2)::
+- Set Python version <x.x.x> (e.g., 3.10.2) for the local workspace::
 
       pyenv local <x.x.x>
 
-- Use local Python version inside the virtual environment::
+- Use the local workspace Python version inside the virtual environment::
 
       poetry env use python
 
@@ -107,7 +114,7 @@ The following steps are to install the Python ecosystem on your local machine:
 
       code .
       
-- Press "Local Runner" from Debug and Run to launch the application (optional)
+- Press "Local Runner" from Debug and Run to launch the application in your OS (optional)
 
 References:
 
@@ -115,9 +122,9 @@ References:
 * https://mitelman.engineering/blog/python-best-practice/automating-python-best-practices-for-a-new-project/#why-run-checks-before-commit
 
 Container Installation
-======================
+----------------------
 
-The following steps are to build the image of the devlopment ecosystem and run it inside one or more Docker containers:
+The following steps are to build the image of the development ecosystem and run it inside one or more Docker containers:
 
 - Install Git
 
@@ -167,13 +174,14 @@ How To
 
       poetry add <newdependency>
       git add pyproject.toml
+      git add poetry.lock
       git commit -m "Added <newdependency>"
       
 - How to generate automatic documentation from the code in a specific format <myformat> (e.g. html) (\*)::
 
       sphinx-build -b <myformat> src/ docs/<myformat>/
 
-  (\*) If not possible inside the local machine, this command shall be excuted within the container for the Tester stage
+  (\*) If it is not executable from the local OS, this command shall be excuted within the Docker container for the Tester stage
 
 - How to erase all Docker containers and images not in use::
 
