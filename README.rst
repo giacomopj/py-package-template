@@ -182,6 +182,11 @@ How To
       sphinx-build -b <myformat> src/ docs/<myformat>/
 
   (\*) If it is not executable from the local OS, this command shall be excuted within the Docker container for the Tester stage
+  
+- How to commit and push code without pre-commit hooks::
+
+      git commit -m "<mymessage>" --no-verify
+      git push --no-verify
 
 - How to cleanup unused images and dangling ones::
 
