@@ -60,8 +60,8 @@ The following steps are to create a new repository from this template:
 Installation
 ============
 
-The toolchain of the Python echosystem can be installed (within a virtual environment) in your local OS or in a Docker container or, preferably, in both.
-On the one hand, it is more covenient to have the continuous integration pipeline automatically executed at every git commit or push from your local OS.
+The toolchain of the Python echosystem can be installed either in your local OS (within a virtual environment) or in a Docker container or, preferably, in both.
+On the one hand, it is more covenient to have the stages of the continuous integration pipeline automatically executed at every git commit and push in your local OS, in which the code editor (i.e., VS Code) is used.
 On the other hand, the Docker container can be used to run and debug the application in Linux.
 
 Local OS Installation
