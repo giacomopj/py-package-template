@@ -70,7 +70,7 @@ The following steps are to install the Python ecosystem on your local machine:
 
 - Install VS Code with Pylance extension
 
-- Setup the repository (see paragraph above)
+- Setup the repository (see Repository Setup)
 
 - Set local Python version <x.x.x> (e.g., 3.10.2)::
 
@@ -125,7 +125,7 @@ The following steps are to build the image of the devlopment ecosystem and run i
 
 - Install VS Code with Pylance and Docker extensions
 
-- Setup the repository (see paragraph above)
+- Setup the repository (see Repository Setup)
 
 A Docker file is provided to assemble an image, which consists of three stages:
 
@@ -173,7 +173,7 @@ How To
 
       sphinx-build -b html src/ docs/<myformat>/
 
-  (\*) If not possible in the local machine, this command shall be excuted within the container for the Tester stage
+  (\*) If not possible inside the local machine, this command shall be excuted within the container for the Tester stage
 
 - How to erase all Docker containers and images::
 
@@ -186,7 +186,7 @@ How To
 Folder Tree
 ===========
 
-Files in the root directory are only for configuration.
+The root directory and the hidden folders therein shall contain only configuration files for the toolchain.
 
 Bin
 ---
@@ -246,7 +246,7 @@ This folder is meant to contain the source code of one or more modules or a pack
 
  * is a collection of modules organized in a folder
    that contains __init__.py
- * can be made of multiple sub-packages
+ * can be made of multiple sub-packages (see /src/a and /src/b sub-folders)
  * can be made executable as a script by providing __main__.py
    which imports the package as a module
 
