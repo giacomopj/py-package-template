@@ -141,7 +141,7 @@ The stages Debugger and Runner can be build and run into a Docker container from
 
 The stage Tester can be build and run into a Docker container from command line (\*) and it executes the script /scripts/start-up.sh (\*\*)::
 
-      docker build --target=tester -t test-app --build-arg CONTEXT=release .
+      docker build --target=tester -t test-app --build-arg CONTEXT=test .
       docker run --rm -it test-app
       
 (\*) All image stages can be built and run from command line::
@@ -154,7 +154,7 @@ The stage Tester can be build and run into a Docker container from command line 
       docker build --target=debugger -t debug-app --build-arg PYTHON_VERSION=<x.x.x> .
       docker run --rm -it --expose 5678 debug-app
 
-(\*\*) This sample script performs all pre-commit and pre-push checks, then launches the application, and finally opens the container root shell
+(\*\*) This sample script performs all pre-commit and pre-push checks, launches the application, and opens the container root shell for testing purposes
 
 References:
 
@@ -169,11 +169,19 @@ How to add a new dependency <newdependency> (e.g., a Python library) to the ecos
       git add pyproject.toml
       git commit -m "Added <newdependency>"
       
-How to generate automatic documentation from the code:
+How to generate automatic documentation from the code in a specific format <myformat> (e.g. html)::
 
-      poetry add <newdependency>
-      git add pyproject.toml
-      git commit -m "Added <newdependency>"
+      sphinx-build -b html src/ docs/<myformat>/ (\*)
+
+(\*) If not possible in the local machine, this command shall be excuted within the container for the Tester stage
+
+How to erase all Docker containers and images::
+
+      docker system prune -a
+
+How to erase all dangling images::
+
+      docker rmi -f $(docker images -qa -f 'dangling=true')
 
 Folder Tree
 ===========
