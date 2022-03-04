@@ -6,10 +6,10 @@ FROM python:${PYTHON_VERSION}-slim AS base
 LABEL maintainer="Giacomo Pojani < giacomo.pj@hotmail.it>"
 
 # Get input parameters
-# CONTEXT defines the stage environment (e.g., development, production)
+# CONTEXT defines the stage context environment (e.g., run, debug, test)
 # USER_NAME defines user name
 # POETRY_VERSION defines Poetry version
-ARG CONTEXT=development
+ARG CONTEXT=run
 ARG USER_NAME=developer
 ARG POETRY_VERSION=1.1.13
 
@@ -59,13 +59,13 @@ RUN poetry config virtualenvs.create false
 
 # Update versions of the dependencies (if needed)
 # --lock Only update .lock file without installing
-RUN poetry update $(test "$CONTEXT" == production && echo "--no-dev") --lock
+RUN poetry update $(test "$CONTEXT" != test && echo "--no-dev") --lock
 
 # Install dependencies
 # --no-root Set installation to regular mode instead of editable mode
 # --no-interaction Turn off interactive questions
 # --no-ansi Disable ANSI output
-RUN poetry install $(test "$CONTEXT" == production && echo "--no-dev") --no-interaction --no-ansi --no-root
+RUN poetry install $(test "$CONTEXT" != test && echo "--no-dev") --no-interaction --no-ansi --no-root
 
 # Copy all files
 COPY . .
@@ -99,6 +99,9 @@ ENTRYPOINT [ "python", "-m", "src"]
 
 # Set tester image
 FROM base AS tester
+
+# Install optional dependencies for automatic documentation
+RUN poetry install --extras docs --no-interaction --no-ansi --no-root
 
 # Grant execution permission to start-up script
 RUN chmod +x ./scripts/start.sh
