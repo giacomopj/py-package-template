@@ -113,6 +113,9 @@ The following steps are to install the Python ecosystem in your local OS:
 - Run VS Code from inside the virtual environment (optional)::
 
       code .
+      
+- Open VS Code command palette (ctrl+shift+P) and look for “Python:Select Interpreter”
+  Select the path of the local workspace Python version set with Pyenv
 
 - Press "Local Runner" from Debug and Run to launch the application in your OS (optional)
 
