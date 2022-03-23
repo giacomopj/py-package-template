@@ -56,7 +56,7 @@ The following steps are to create a new repository from this template:
       git add .
       git commit -m "First commit"
       git push -u origin master
-      
+
 Installation
 ============
 
@@ -113,7 +113,7 @@ The following steps are to install the Python ecosystem in your local OS:
 - Run VS Code from inside the virtual environment (optional)::
 
       code .
-      
+
 - Press "Local Runner" from Debug and Run to launch the application in your OS (optional)
 
 References:
@@ -150,14 +150,14 @@ The stage Tester can be build and run into a Docker container from command line 
 
       docker build --target=tester -t test-app --build-arg CONTEXT=test .
       docker run --rm -it test-app
-      
+
 (\*) All image stages can be built and run from command line::
 
     docker build --target=runner -t run-app .
     docker run --rm -it run-app
-      
+
 From command line is also possible to pass the Python version <x.x.x> (i.e., 3.10.2 by default) as a parameter::
-      
+
     docker build --target=debugger -t debug-app --build-arg PYTHON_VERSION=<x.x.x> .
     docker run --rm -it --expose 5678 debug-app
 
@@ -176,13 +176,13 @@ How To
       git add pyproject.toml
       git add poetry.lock
       git commit -m "Added <newdependency>"
-      
+
 - How to generate automatic documentation from the code in a specific format <myformat> (e.g. html) (\*)::
 
       sphinx-build -b <myformat> src/ docs/<myformat>/
 
   (\*) If it is not executable from the local OS, this command shall be excuted within the Docker container for the Tester stage
-  
+
 - How to commit and push code without pre-commit hooks::
 
       git commit -m "<mymessage>" --no-verify
