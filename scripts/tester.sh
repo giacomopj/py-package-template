@@ -16,5 +16,5 @@ pytest --cov --cov-fail-under=100
 printf "\nRunning application executable\n"
 python -m src Tester Container
 
-# Run console
+# Run terminal with bash shell
 /bin/bash
