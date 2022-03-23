@@ -24,7 +24,7 @@ The development ecosystem in this repository comprises the following toolchain:
 - The project is containerized with *Docker* and multi-stage builds
 - The project IDE is *VS Code* pre-configured for the whole toolchain
 
-(\*) Not used in the Docker container, whose image is tied to the Python version passed as parameter (i.e., 3.10.2 by default)
+(\*) Not used in the Docker container, whose custom Linux image is tied to the Python version passed as parameter (i.e., 3.10.2 by default)
 
 (\*\*) The static checker is configured to return errors as warnings, so that it does not break the pipeline
 
@@ -62,9 +62,9 @@ Installation
 
 The toolchain of the Python echosystem can be installed either in the host OS (within a virtual environment) or in a Docker container or, preferably, in both.
 On the one hand, it is more covenient to have the stages of the continuous integration pipeline automatically executed at every git commit and push in your host OS, in which the code editor (i.e., VS Code) is used (\*).
-On the other hand, the Docker container can be used to run and debug the application in Linux.
+On the other hand, the Docker container can be used to run and debug the application in a custom Linux image, in which any dependency issue has been already fixed.
 
-(\*) Therefore, it is recommended to complete the installation in the host OS, even if Poetry fails to install some of the dependencies. This is necessary because
+(\*) Therefore, it is recommended to complete the installation in the host OS, even if Poetry fails to install some dependencies. This is necessary because
 
 * all code checks are run at every Git commit and push command from the host OS terminal
 
@@ -134,7 +134,7 @@ References:
 Container Installation
 ----------------------
 
-The following steps are to build the image of the development ecosystem and run it inside one or more Docker containers:
+The following steps are to build the custom Linux image hosting the development ecosystem and run it inside one or more Docker containers:
 
 - Install Git
 
@@ -144,11 +144,27 @@ The following steps are to build the image of the development ecosystem and run 
 
 - Setup the repository (see Repository Setup)
 
-A Docker file is provided to assemble an image, which consists of three stages:
+A Docker file is provided to assemble a multi-stage image, which consists of three stages from the same base stage:
 
 #. Debugger
 #. Runner
 #. Tester
+
+```
+journey
+	title Me studying for exams
+	section Exam is announced
+		I start studying: 1: Me
+		Make notes: 2: Me
+		Ask friend for help: 3: Me, Friend
+		We study togther: 5: Me, Friend
+	section Exam Day
+		Syllabys is incomplete: 2: Me
+		Give exam: 1: Me, Friend
+	section Result Declared
+		I passed the exam with destinction!: 5: Me
+		Friend barely gets passing marks: 2: Friend
+```
 
 The stages Debugger and Runner can be build and run into a Docker container from Debug and Run in VS Code:
 
