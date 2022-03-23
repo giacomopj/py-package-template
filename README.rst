@@ -6,7 +6,7 @@ This is a template repository for Python packages.
 
 The goal is to encapsulate a Python development ecosystem that encourages test-driven and continuous code integration with uniform format and type safety.
 
-Python is an interpreted language. Building Python packages deos not necessarily involve compiling, which can be computationally intensive. Therefore, continuous integration can be carried out locally, either in the local OS or in a Linux-based Docker container. In here, a pipeline goes automatically through a series of checks and unit tests before commiting or pushing code to the remote repository.
+Python is an interpreted language. Building Python packages deos not necessarily involve compiling, which can be computationally intensive. Therefore, continuous integration can be carried out with the local machine, through either the host OS or a Linux-based Docker container. In here, a pipeline goes automatically through a series of checks and unit tests before commiting or pushing code to the remote repository.
 
 The build system orchestrates the several tools for continuous integration.
 
@@ -60,14 +60,20 @@ The following steps are to create a new repository from this template:
 Installation
 ============
 
-The toolchain of the Python echosystem can be installed either in your local OS (within a virtual environment) or in a Docker container or, preferably, in both.
-On the one hand, it is more covenient to have the stages of the continuous integration pipeline automatically executed at every git commit and push in your local OS, in which the code editor (i.e., VS Code) is used.
+The toolchain of the Python echosystem can be installed either in the host OS (within a virtual environment) or in a Docker container or, preferably, in both.
+On the one hand, it is more covenient to have the stages of the continuous integration pipeline automatically executed at every git commit and push in your host OS, in which the code editor (i.e., VS Code) is used (\*).
 On the other hand, the Docker container can be used to run and debug the application in Linux.
 
-Local OS Installation
----------------------
+(\*) Therefore, it is recommended to complete the installation in the host OS, even if Poetry fails to install some of the dependencies. This is necessary because
 
-The following steps are to install the Python ecosystem in your local OS:
+* all code checks are run at every Git commit and push command from the host OS terminal
+
+* debugging the code through a Docker container still requires to set and select the Python version of the local envrionement in VS Code
+
+Host OS Installation
+--------------------
+
+The following steps are to install the Python ecosystem in your host OS:
 
 - Install Git
 
@@ -83,7 +89,7 @@ The following steps are to install the Python ecosystem in your local OS:
 
       pyenv local <x.x.x>
 
-- Use the local workspace Python version inside the virtual environment::
+- Use the local-workspace Python version to be used inside the virtual environment::
 
       poetry env use python
 
@@ -110,14 +116,15 @@ The following steps are to install the Python ecosystem in your local OS:
       pytest
       pytest --cov --cov-fail-under=100
 
-- Run VS Code from inside the virtual environment (optional)::
+- Run VS Code from inside the virtual environment::
 
       code .
       
-- Open VS Code command palette (ctrl+shift+P) and look for “Python:Select Interpreter”
-  Select the path of the local workspace Python version set with Pyenv
+- Inside VS Code open the command palette (ctrl+shift+P) and look for “Python:Select Interpreter”
 
-- Press "Local Runner" from Debug and Run to launch the application in your OS (optional)
+- Select the path of the local-workspace Python version set with Pyenv
+
+- Press "Terminal" from Debug and Run to launch the application in your OS (optional)
 
 References:
 
@@ -184,7 +191,7 @@ How To
 
       sphinx-build -b <myformat> src/ docs/<myformat>/
 
-  (\*) If it is not executable from the local OS, this command shall be excuted within the Docker container for the Tester stage
+  (\*) If it is not executable from the host OS, this command shall be excuted within the Docker container for the Tester stage
 
 - How to commit and push code without pre-commit hooks::
 
