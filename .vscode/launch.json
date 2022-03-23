@@ -1,13 +1,14 @@
 {
     "configurations": [
         {
-            "name": "Local Runner",
+            "name": "Terminal",
             "type": "python",
             "request": "launch",
             "program": "src",
             "console": "integratedTerminal",
             "cwd": "${workspaceFolder}",
-            "env": {"PYTHONPATH": "${cwd}"}
+            "env": {"PYTHONPATH": "${cwd}"},
+            "envFile": "${workspaceFolder}/.env"
         },
         {
             "name": "Docker Runner",
@@ -16,10 +17,24 @@
             "preLaunchTask": "run-runner",
             "python": {
                 "pathMappings": [
-                {
-                    "localRoot":"${workspaceFolder}",
-                    "remoteRoot": "/opt/app"
-                }
+                    {
+                        "localRoot": "${workspaceFolder}",
+                        "remoteRoot": "/opt/app"
+                    }
+                ],
+            }
+        },
+        {
+            "name": "Docker Runner [No build]",
+            "type": "docker",
+            "request": "launch",
+            "preLaunchTask": "run-runner-no-build",
+            "python": {
+                "pathMappings": [
+                    {
+                        "localRoot": "${workspaceFolder}",
+                        "remoteRoot": "/opt/app"
+                    }
                 ],
             }
         },
@@ -27,29 +42,45 @@
             "name": "Docker Debugger",
             "type": "docker",
             "request": "attach",
-            "preLaunchTask": "docker-run: debugger",
+            "preLaunchTask": "run-debugger",
             "python": {
+                "port": 5678,
+                "host": "localhost",
                 "pathMappings": [
-                {
-                    "localRoot":"${workspaceFolder}",
-                    "remoteRoot": "/opt/app"
-                }
+                    {
+                        "localRoot": "${workspaceFolder}",
+                        "remoteRoot": "/opt/app"
+                    }
                 ],
             }
         },
         {
-            "name": "Docker Debugger [WIP]",
-            "type": "python",
-            "request": "attach",
-            "preLaunchTask": "run-debugger",
-            "host":"localhost",
-            "port":5678,
-            "pathMappings":[
-                {
-                    "localRoot":"${workspaceFolder}",
-                    "remoteRoot": "/opt/app"
-                }
-            ]
+            "name": "Docker Tester",
+            "type": "docker",
+            "request": "launch",
+            "preLaunchTask": "run-tester",
+            "python": {
+                "pathMappings": [
+                    {
+                        "localRoot": "${workspaceFolder}",
+                        "remoteRoot": "/opt/app"
+                    }
+                ],
+            }
+        },
+        {
+            "name": "Docker Tester [No build]",
+            "type": "docker",
+            "request": "launch",
+            "preLaunchTask": "run-tester-no-build",
+            "python": {
+                "pathMappings": [
+                    {
+                        "localRoot": "${workspaceFolder}",
+                        "remoteRoot": "/opt/app"
+                    }
+                ],
+            }
         }
     ]
 }

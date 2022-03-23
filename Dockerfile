@@ -3,14 +3,11 @@ ARG PYTHON_VERSION=3.10.2
 
 # Set base image
 FROM python:${PYTHON_VERSION}-slim AS base
-LABEL maintainer="Giacomo Pojani < giacomo.pj@hotmail.it>"
+LABEL maintainer="Giacomo Pojani <giacomo.pj@hotmail.it>"
 
 # Get input parameters
 # CONTEXT defines the stage context environment (e.g., run, debug, test)
-# USER_NAME defines user name
-# POETRY_VERSION defines Poetry version
 ARG CONTEXT=run
-ARG USER_NAME=developer
 ARG POETRY_VERSION=1.1.13
 
 # Set environment variables
@@ -27,22 +24,21 @@ PIP_DISABLE_PIP_VERSION_CHECK=on \
 PIP_DEFAULT_TIMEOUT=100 \
 # Poetry variables
 POETRY_VERSION=${POETRY_VERSION} \
-POETRY_VIRTUALENVS_CREATE=false \
+POETRY_VIRTUALENVS_CREATE=true \
 POETRY_HOME="/opt/poetry" \
-# POETRY_CACHE_DIR='/var/cache/pypoetry' \
+POETRY_CACHE_DIR='/var/cache/pypoetry' \
 POETRY_NO_INTERACTION=1 \
 # Application variables
-APP_PATH="/opt/app"
+APP_PATH="/opt/app" \
+VIRTUAL_ENV="/opt/app/venv"
 
 # Prepend Poetry and virtual environment paths
-ENV PATH="${POETRY_HOME}/bin:${PATH}"
+ENV PATH="${POETRY_HOME}/bin:${VIRTUAL_ENV}/bin:${PATH}"
 
-# Install system dependencies for base image
+# Install essential dependencies
 RUN apt-get update && \
 apt-get upgrade -y && \
-apt-get install --no-install-recommends && \
-apt-get install -y gcc && \
-apt-get install -y git && \
+apt-get install -y build-essential git gcc g++ libffi-dev musl-dev && \
 pip3 install pip wheel setuptools
 
 # Install Poetry
@@ -51,24 +47,33 @@ RUN pip3 install poetry==${POETRY_VERSION}
 # Set application path as working directory
 WORKDIR $APP_PATH
 
+# Enable virtual environment creation
+RUN poetry config virtualenvs.create true
+
+# Set virtual environment path
+RUN poetry config virtualenvs.path $VIRTUAL_ENV
+
+# Create virtual environment
+RUN python -m venv $VIRTUAL_ENV
+
 # Copy list of dependencies into the working directory
 COPY pyproject.toml poetry.lock ./
 
-# Disable virtual environment creation
-RUN poetry config virtualenvs.create false
-
 # Update versions of the dependencies (if needed)
-# --lock Only update .lock file without installing
-RUN poetry update $(test "$CONTEXT" != test && echo "--no-dev") --lock
+RUN poetry update $(test "$CONTEXT" != test && echo "--no-dev") --lock -vvv
 
 # Install dependencies
-# --no-root Set installation to regular mode instead of editable mode
-# --no-interaction Turn off interactive questions
-# --no-ansi Disable ANSI output
-RUN poetry install $(test "$CONTEXT" != test && echo "--no-dev") --no-interaction --no-ansi --no-root
+#  RUN poetry install $(test "$CONTEXT" != test && echo "--no-dev") --no-interaction --no-ansi --no-root -vvv
+
+# Export dependencies from Poetry and install them with Pip
+RUN poetry export --without-hashes -f $(test "$CONTEXT" == test && echo "--dev") requirements.txt | \
+$VIRTUAL_ENV/bin/pip install -r /dev/stdin
 
 # Copy all files
-COPY . .
+COPY . ./
+
+# Build a wheel with Poetry and then install it with Pip
+RUN poetry build && $VIRTUAL_ENV/bin/pip install dist/*.whl
 
 # Set pre-commit and pre-push hooks
 RUN if [ "$CONTEXT" == test ] ; then \
@@ -77,21 +82,36 @@ pre-commit install -t pre-push ; fi
 
 # ---
 
-# Set debuger image
+# Set debugger image
 FROM base AS debugger
+
+# Copy environment
+COPY --from=base $VIRTUAL_ENV $VIRTUAL_ENV
+ENV PATH="${POETRY_HOME}/bin:${VIRTUAL_ENV}/bin:${PATH}"
 
 # Expose port of debugger
 EXPOSE 5678
 
-# Set debugger as entry point
-ENTRYPOINT [ "python", "-m", "debugpy", "--listen", "0.0.0.0:5678", "--wait-for-client", "-m" ]
+# Grant execution permission to start-up script
+RUN chmod +x ./scripts/debugger.sh
+
+# Execute script at container start-up
+CMD ["./scripts/debugger.sh"]
 
 # ---
 
 # Set runner image
 FROM base AS runner
 
-ENTRYPOINT [ "python", "-m", "src"]
+# Copy environment
+COPY --from=base $VIRTUAL_ENV $VIRTUAL_ENV
+ENV PATH="${POETRY_HOME}/bin:${VIRTUAL_ENV}/bin:${PATH}"
+
+# Grant execution permission to start-up script
+RUN chmod +x ./scripts/runner.sh
+
+# Execute script at container start-up
+CMD ["./scripts/runner.sh"]
 
 # ---
 
@@ -101,8 +121,12 @@ FROM base AS tester
 # Install optional dependencies for automatic documentation
 RUN poetry install --extras docs --no-interaction --no-ansi --no-root
 
+# Copy environment
+COPY --from=base $VIRTUAL_ENV $VIRTUAL_ENV
+ENV PATH="${POETRY_HOME}/bin:${VIRTUAL_ENV}/bin:${PATH}"
+
 # Grant execution permission to start-up script
-RUN chmod +x ./scripts/start.sh
+RUN chmod +x ./scripts/tester.sh
 
 # Execute script at container start-up
-CMD ["./scripts/start.sh"]
+CMD ["./scripts/tester.sh"]

@@ -1,6 +1,6 @@
-===================
-py-package-template
-===================
+=======================
+Python Package Template
+=======================
 
 This is a template repository for Python packages.
 

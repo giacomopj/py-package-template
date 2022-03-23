@@ -136,3 +136,11 @@ dmypy.json
 
 # macOS folder attributes
 .DS_Store
+
+# Pip requirements (exported from Poetry)
+requirements.txt
+
+# Application input/output
+data/
+logs/
+plots/
