@@ -1,16 +1,38 @@
 [tool.poetry]
-name = "py-package-template"
+name = "sigint-package-template"
 version = "0.1.0"
-description = "Python Package Template"
-authors = ["Giacomo Pojani <giacomo.pj@hotmail.it>"]
+description = "SigInt Constellation Analyzer"
+authors = ["Giacomo Pojani <giacomo.pojani@spire.com>"]
 packages = [
     {include = "src"}
 ]
 
 [tool.poetry.dependencies]
-python = "3.10.2" # Python version is fixed to be compatible with other dependencies
+python = "3.10.2" # Python version is fixed to be compatible with Scipy
+cython = "^0.29.28"
 sphinx = { version = "^4.4.0", optional = true }
 sphinx-rtd-theme = { version = "1.0.0", optional = true }
+numpy = "^1.22.2"
+pyproj = "^3.3.0"
+pymap3d = "^2.7.2"
+scipy = "^1.8.0"
+matplotlib = "^3.5.1"
+sklearn = "^0.0"
+pyshp = "^2.2.0"
+Shapely = "^1.8.1"
+cartopy = "0.19.0.post1" # Cartopy verion is fixed to be compatible with Proj
+pyephem = "^9.99" # From here dependencies of tlegen
+pandas = "^1.4.1"
+bokeh = "0.12.6"
+mercantile = "^1.2.1"
+requests = "^2.27.1"
+spacetrack = "^0.13.7"
+sgp4 = "^2.20"
+future = "^0.18.2"
+gitdb2 = "2.0.0"
+GitPython = "^2.1.15"
+pdoc3 = "^0.10.0"
+imageio = "^2.16.1"
 
 [tool.poetry.dev-dependencies]
 pytest = "^7.0"

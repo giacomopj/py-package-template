@@ -3,12 +3,14 @@ ARG PYTHON_VERSION=3.10.2
 
 # Set base image
 FROM python:${PYTHON_VERSION}-slim AS base
-LABEL maintainer="Giacomo Pojani <giacomo.pj@hotmail.it>"
+LABEL maintainer="Giacomo Pojani <giacomo.pojani@spire.com>"
 
 # Get input parameters
 # CONTEXT defines the stage context environment (e.g., run, debug, test)
+# POETRY_VERSION defines Poetry version
 ARG CONTEXT=run
 ARG POETRY_VERSION=1.1.13
+ARG GIT_ACCESS_TOKEN=ghp_
 
 # Set environment variables
 ENV CONTEXT=$CONTEXT \
@@ -41,6 +43,10 @@ apt-get upgrade -y && \
 apt-get install -y build-essential git gcc g++ libffi-dev musl-dev && \
 pip3 install pip wheel setuptools
 
+# Install ad-hoc dependencies for Cartopy installation
+RUN apt-get install -y libproj-dev libgeos-dev && \
+apt-get install -y proj-data proj-bin
+
 # Install Poetry
 RUN pip3 install poetry==${POETRY_VERSION}
 
@@ -62,6 +68,10 @@ COPY pyproject.toml poetry.lock ./
 # Update versions of the dependencies (if needed)
 RUN poetry update $(test "$CONTEXT" != test && echo "--no-dev") --lock -vvv
 
+# Add ad-hoc dependencies of Spire nsat repositories
+RUN poetry add git+https://${GIT_ACCESS_TOKEN}@github.com/nsat/tlegen.git -vvv
+RUN poetry add git+https://${GIT_ACCESS_TOKEN}@github.com/nsat/pypredict.git -vvv
+
 # Install dependencies
 #  RUN poetry install $(test "$CONTEXT" != test && echo "--no-dev") --no-interaction --no-ansi --no-root -vvv
 
@@ -69,7 +79,7 @@ RUN poetry update $(test "$CONTEXT" != test && echo "--no-dev") --lock -vvv
 RUN poetry export --without-hashes -f $(test "$CONTEXT" == test && echo "--dev") requirements.txt | \
 $VIRTUAL_ENV/bin/pip install -r /dev/stdin
 
-# Copy all files
+# Copy files
 COPY . ./
 
 # Build a wheel with Poetry and then install it with Pip

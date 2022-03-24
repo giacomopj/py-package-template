@@ -2,6 +2,7 @@
 	"version": "2.0.0",
     "options": {
         "env": {
+            "GIT_ACCESS_TOKEN": "${config:GIT_ACCESS_TOKEN}",
             "WORKSPACE_PATH": "${fileWorkspaceFolder}"
         }
     },
@@ -20,7 +21,7 @@
 				"cleanup-dangling-images"
 			],
             "command": [
-                "docker build --build-arg CONTEXT=test --target=tester -t test-${workspaceFolderBasename} ."
+                "docker build --build-arg GIT_ACCESS_TOKEN=$GIT_ACCESS_TOKEN --build-arg CONTEXT=test --target=tester -t test-${workspaceFolderBasename} ."
             ]
         },
 		{
@@ -30,7 +31,7 @@
 				"cleanup-dangling-images"
 			],
             "command": [
-                "docker build --target=debugger -t debug-${workspaceFolderBasename} ."
+                "docker build --build-arg GIT_ACCESS_TOKEN=$GIT_ACCESS_TOKEN --target=debugger -t debug-${workspaceFolderBasename} ."
             ]
         },
 		{
@@ -40,7 +41,7 @@
 				"cleanup-dangling-images"
 			],
             "command": [
-                "docker build --target=runner -t run-${workspaceFolderBasename} ."
+                "docker build --build-arg GIT_ACCESS_TOKEN=$GIT_ACCESS_TOKEN --target=runner -t run-${workspaceFolderBasename} ."
             ]
         },
         {
