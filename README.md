@@ -322,7 +322,7 @@ References:
 
       sphinx-build -b <myformat> src/ docs/<myformat>/
 
-  (\*) If it is not executable from the host OS, this command might be excuted from the bash shell within the container for the Tester image
+  (\*) If it is not executable from the host OS, this command might be excuted from the bash shell within a container (e.g., Tester image)
 
 - How to commit and push code without pre-commit hooks:
 
