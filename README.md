@@ -146,7 +146,7 @@ The following steps are to build the custom Linux image hosting the development 
 
 ## 3. Template Design
 
-The template is designed to match the directory structure and the configuration of VS Code interactions with Docker. These scripts should speed up the development as well as the handling of input/output files to the containers.
+The template is designed to match the directory structure and the configuration of VS Code interactions with Docker. These scripts should speed up the development as well as the handling of input/output files to and from the running containers.
 
 ### 3.1. Directory Structure
 
