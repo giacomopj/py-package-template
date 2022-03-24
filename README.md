@@ -217,7 +217,7 @@ This folder is meant to contain the source code of one or more modules or a pack
 
 This folder is meant to contain unit tests.
 
-> The tree of this folder shall mirror that of the source code
+> The structure of this folder shall mirror the sub-packages in the source code
 
 ## 3.2. Docker and VS Code
 
@@ -235,7 +235,7 @@ The following graph represents the Dockerfile, in which:
 
 * \*app\* is the name of the folder containing the repository, which is also the workspace directory opened with VS Code
 
-:: mermaid
+```mermaid
 graph TD
     A[python-*x.x.x*-slim] -->|First stage: build a base image from Linux with Python version *x.x.x* <br /> and create a virtual environment with common dependencies| B[base]
     B --> C[runner]
@@ -244,7 +244,7 @@ graph TD
     C -->|Run image inside a container and <br /> execute runner.sh to launch the *app* <br /> for run-time execution| F(run-*app*)
     D -->|Run image inside a container and <br /> execute debugger.sh to launch the *app* <br /> for code debugging| G(debug-*app*)
     E -->|Run image inside a container and <br /> execute tester.sh to launch the *app* <br /> and bash shell for testing| H(test-*app*)
-::
+```
 
 ### Build and Run
 
@@ -270,7 +270,7 @@ Files are handled in two different ways.
 
 The following flowchart shows the input and output files to and from the containers
 
-:: mermaid
+```mermaid
 flowchart TB
     subgraph Docker
     subgraph Volumes
@@ -301,7 +301,7 @@ flowchart TB
     /tests
     end
     end
-::
+```
 
 References:
 
