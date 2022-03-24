@@ -19,7 +19,7 @@ The development ecosystem in this repository comprises the following toolchain:
 - Code checks above are hooked to every Git commit
 - Unit tests and test coverage checks are hooked to every Git push (\*\*\*)
 - Documentation can be automatically generated from the code with *Sphinx*
-- The project is containerized with *Docker* and multi-stage builds
+- The project is containerized with *Docker* and multi-stage image
 - The project IDE is *VS Code* pre-configured for the whole toolchain
 
 (\*) Not used in the Docker container, whose custom Linux image is tied to the Python version (i.e., 3.10.2 by default)
@@ -237,10 +237,10 @@ The following graph represents the Dockerfile, in which:
 
 ```mermaid
 graph TD
-    A[python-*x.x.x*-slim] -->|First stage: build a base image from Linux with Python version *x.x.x* <br /> and create a virtual environment with common dependencies| B[base]
-    B --> C[runner]
-    B -->|Second stage: copy the virtual environment <br /> and build futher images with specific additions| D[debugger]
-    B --> E[tester]
+    A[python-*x.x.x*-slim] -->|First stage: build a base image from Linux with Python version *x.x.x* <br /> and create a virtual environment with common dependencies| B[Base]
+    B --> C[Runner]
+    B -->|Second stage: copy the virtual environment <br /> and build futher images with specific additions| D[Debugger]
+    B --> E[Tester]
     C -->|Run image inside a container and <br /> execute runner.sh to launch the *app* <br /> for run-time execution| F(run-*app*)
     D -->|Run image inside a container and <br /> execute debugger.sh to launch the *app* <br /> for code debugging| G(debug-*app*)
     E -->|Run image inside a container and <br /> execute tester.sh to launch the *app* <br /> and bash shell for testing| H(test-*app*)
@@ -307,7 +307,7 @@ References:
 
 * https://code.visualstudio.com/docs/remote/containers
 
-## 5. How To
+## 4. How To
 
 - How to add a new dependency <newdependency> (e.g., a Python library) to the ecosystem:
 
@@ -316,11 +316,13 @@ References:
       git add poetry.lock
       git commit -m "Added <newdependency>"
 
+  Such addition implies re-building the Docker image
+
 - How to generate automatic documentation from the code in a specific format <myformat> (e.g. html) (\*):
 
       sphinx-build -b <myformat> src/ docs/<myformat>/
 
-  (\*) If it is not executable from the host OS, this command might be excuted from the bash shell within the Docker container for the Tester stage
+  (\*) If it is not executable from the host OS, this command might be excuted from the bash shell within the container for the Tester image
 
 - How to commit and push code without pre-commit hooks:
 
