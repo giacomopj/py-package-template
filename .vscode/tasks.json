@@ -1,0 +1,115 @@
+{
+	"version": "2.0.0",
+    "options": {
+        "env": {
+            "WORKSPACE_PATH": "${fileWorkspaceFolder}"
+        }
+    },
+	"tasks": [
+        {
+            "label": "cleanup-dangling-images",
+            "type": "shell",
+            "command": [
+                "docker image prune -f"
+            ]
+        },
+        {
+            "label": "build-tester",
+            "type": "shell",
+            "dependsOn": [
+				"cleanup-dangling-images"
+			],
+            "command": [
+                "docker build --build-arg CONTEXT=test --target=tester -t test-${workspaceFolderBasename} ."
+            ]
+        },
+		{
+            "label": "build-debugger",
+            "type": "shell",
+            "dependsOn": [
+				"cleanup-dangling-images"
+			],
+            "command": [
+                "docker build --target=debugger -t debug-${workspaceFolderBasename} ."
+            ]
+        },
+		{
+            "label": "build-runner",
+            "type": "shell",
+            "dependsOn": [
+				"cleanup-dangling-images"
+			],
+            "command": [
+                "docker build --target=runner -t run-${workspaceFolderBasename} ."
+            ]
+        },
+        {
+			"label": "run-tester",
+			"type": "shell",
+			"dependsOn": [
+				"build-tester"
+			],
+            "command": [
+                "docker run --rm -it -v ${WORKSPACE_PATH}/src:/opt/app/src -v ${WORKSPACE_PATH}/data:/opt/app/data -v ${workspaceFolderBasename}-logs:/opt/app/logs -v ${workspaceFolderBasename}-plots:/opt/app/plots --name test-${workspaceFolderBasename} test-${workspaceFolderBasename}",
+            ]
+		},
+        {
+			"label": "run-tester-no-build",
+			"type": "shell",
+            "command": [
+                "docker run --rm -it -v ${WORKSPACE_PATH}/src:/opt/app/src -v ${WORKSPACE_PATH}/data:/opt/app/data -v ${workspaceFolderBasename}-logs:/opt/app/logs -v ${workspaceFolderBasename}-plots:/opt/app/plots --name test-${workspaceFolderBasename} test-${workspaceFolderBasename}",
+            ]
+		},
+		{
+			"type": "docker-run",
+			"label": "run-debugger",
+			"dependsOn": [
+                "build-debugger"
+			],
+			"python": {
+				"args": ["Debugger", "Container"],
+				"module": "src"
+			},
+			"dockerRun": {
+                "image": "debug-${workspaceFolderBasename}",
+                "containerName": "debug-${workspaceFolderBasename}",
+                "remove": true,
+                "volumes": [
+                    {
+                        "containerPath": "/opt/app/src",
+                        "localPath": "${workspaceFolder}/src"
+                    },
+                    {
+                        "containerPath": "/opt/app/data",
+                        "localPath": "${workspaceFolder}/data"
+                    },
+                    {
+                        "containerPath": "/opt/app/logs",
+                        "localPath": "${workspaceFolderBasename}-logs"
+                    },
+                    {
+                        "containerPath": "/opt/app/plots",
+                        "localPath": "${workspaceFolderBasename}-plots"
+                    }
+                ]
+            }
+		},
+		{
+			"label": "run-runner",
+			"type": "shell",
+			"dependsOn": [
+				"build-runner"
+			],
+            "command": [
+                "docker run --rm -it -v ${WORKSPACE_PATH}/src:/opt/app/src -v ${WORKSPACE_PATH}/data:/opt/app/data -v ${workspaceFolderBasename}-logs:/opt/app/logs -v ${workspaceFolderBasename}-plots:/opt/app/plots --name run-${workspaceFolderBasename} run-${workspaceFolderBasename}",
+            ]
+		},
+        {
+			"label": "run-runner-no-build",
+			"type": "shell",
+            "command": [
+                "docker run --rm -it -v ${WORKSPACE_PATH}/src:/opt/app/src -v ${WORKSPACE_PATH}/data:/opt/app/data -v ${workspaceFolderBasename}-logs:/opt/app/logs -v ${workspaceFolderBasename}-plots:/opt/app/plots --name run-${workspaceFolderBasename} run-${workspaceFolderBasename}",
+            ]
+		}
+	]
+}
