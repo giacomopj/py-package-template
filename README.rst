@@ -150,12 +150,14 @@ A Docker file is provided to assemble a multi-stage image, which consists of thr
 #. Runner
 #. Tester
 
-.. figure:: docker_graph.svg
+![alt text](docker_graph.png)
+
+.. figure:: docker_graph.png
     :align: center
     :target: link-to-go-when-image-is-clicked
     :alt: alternative-text-if-any
 
- .. image:: docker_graph.svg
+ .. image:: docker_graph.png
    :width: 200px
    :height: 100px
    :scale: 50 %
