@@ -1,8 +1,0 @@
-graph TD
-    A[python-*x.x.x*-slim] -->|First stage: build a base image from Linux with Python version *x.x.x* <br /> and create a virtual environment with common dependencies| B[base]
-    B --> C[runner]
-    B -->|Second stage: copy the virtual environment <br /> and build futher images with specific additions| D[debugger]
-    B --> E[tester]
-    C -->|Run image inside a container and <br /> execute runner.sh to launch the *app* <br /> for run-time execution| F(run-*app*)
-    D -->|Run image inside a container and <br /> execute debugger.sh to launch the *app* <br /> for code debugging| G(debug-*app*)
-    E -->|Run image inside a container and <br /> execute tester.sh to launch the *app* <br /> and bash shell for testing| H(test-*app*)
