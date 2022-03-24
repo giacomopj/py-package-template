@@ -150,21 +150,12 @@ A Docker file is provided to assemble a multi-stage image, which consists of thr
 #. Runner
 #. Tester
 
-```
-journey
-	title Me studying for exams
-	section Exam is announced
-		I start studying: 1: Me
-		Make notes: 2: Me
-		Ask friend for help: 3: Me, Friend
-		We study togther: 5: Me, Friend
-	section Exam Day
-		Syllabys is incomplete: 2: Me
-		Give exam: 1: Me, Friend
-	section Result Declared
-		I passed the exam with destinction!: 5: Me
-		Friend barely gets passing marks: 2: Friend
-```
+ .. image:: ./resources/docker_graph.svg
+   :width: 200px
+   :height: 100px
+   :scale: 50 %
+   :alt: alternate text
+   :align: right
 
 The stages Debugger and Runner can be build and run into a Docker container from Debug and Run in VS Code:
 
