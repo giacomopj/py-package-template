@@ -312,6 +312,14 @@ References:
 
 ## 4. How To
 
+- How to keep up-to-date with this template any branch <branchname> (e.g., master) of any repository based on this template
+
+      git remote add template https://github.com/giacomopj/py-package-template.git
+      git fetch --all
+      git merge template/<branchname> --allow-unrelated-histories
+
+  Merging the updates inevitably causes a number of conflicts (in README.md, pyproject.toml, etc.) that have to be resolved manually
+
 - How to add a new dependency <newdependency> (e.g., a Python library) to the ecosystem:
 
       poetry add <newdependency>
