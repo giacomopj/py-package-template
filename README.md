@@ -264,8 +264,8 @@ Files are handled in two different ways.
    * **/tests** - unit testing code in the container is up-to-date with the code in the host OS workspace directory
 
 2. Files in following folders of the running containers are made available in Docker as volumes, from which they can be moved to the host OS:
-   * **/logs** - logs produced inside the container are made available in the volume \*app\*-logs
-   * **/plots** - plots produced inside the container are made available in the volume \*app\*-plots
+   * **/logs** - logs produced inside the container are stored in the volume \*app\*-logs
+   * **/plots** - plots produced inside the container are stored in the volume \*app\*-plots
 
 ![alt text](/resources/docker_volumes.png)
 
