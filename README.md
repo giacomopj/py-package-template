@@ -327,7 +327,7 @@ References:
       git add poetry.lock
       git commit -m "Added <newdependency>"
 
-  Such addition implies re-building the Docker image
+  Adding a dependency implies re-building the Docker image
 
 - How to generate automatic documentation from the code in a specific format <myformat> (e.g. html) (\*):
 
