@@ -258,13 +258,14 @@ Note that any build is time-consuming and requires Internet connection. A fresh 
 
 Files are handled in two different ways.
 
-1. Files in the following folders within the host OS workspace directory are automatically copied to (and from) the running containers without the need to re-build any Docker image:
-   * **/data** - data can be added/modfied/removed by both the host OS and the containers
-   * **/src** - source code in the container is udated with the code in the host OS workspace directory at every new Docker image run
+1. Files in the following folders within the host OS workspace directory are automatically synchronised to the homonymous folders inside the running containers, without the need to re-build the Docker image:
+   * **/data** - data can be added/modified/removed by both the host OS and the containers
+   * **/src** - source code in the container is up-to-date with the code in the host OS workspace directory
+   * **/tests** - unit testing code in the container is up-to-date with the code in the host OS workspace directory
 
-2. Files in following folders of the running containers are made available in Docker as volumes, from which they can be saved into the host OS:
-   * **/logs** - logs are synchronised to the volume \*app\*-logs
-   * **/plots** - plots are synchronised to the volume \*app\*-plots
+2. Files in following folders of the running containers are made available in Docker as volumes, from which they can be moved to the host OS:
+   * **/logs** - logs produced inside the container are made available in the volume \*app\*-logs
+   * **/plots** - plots produced inside the container are made available in the volume \*app\*-plots
 
 ![alt text](/resources/docker_volumes.png)
 
@@ -298,7 +299,9 @@ flowchart TB
     /src-->run-*app*
     /src-->debug-*app*
     /src-->test-*app*
-    /tests
+    /tests-->run-*app*
+    /tests-->debug-*app*
+    /tests-->test-*app*
     end
     end
 ```
