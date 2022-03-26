@@ -39,7 +39,7 @@ ENV PATH="${POETRY_HOME}/bin:${VIRTUAL_ENV}/bin:${PATH}"
 RUN apt-get update && \
 apt-get upgrade -y && \
 apt-get install -y build-essential git gcc g++ libffi-dev musl-dev && \
-pip3 install pip wheel setuptools
+pip3 install --upgrade pip wheel setuptools
 
 # Install Poetry
 RUN pip3 install poetry==${POETRY_VERSION}
@@ -67,7 +67,7 @@ RUN poetry update $(test "$CONTEXT" != test && echo "--no-dev") --lock -vvv
 
 # Export dependencies from Poetry and install them with Pip
 RUN poetry export --without-hashes -f $(test "$CONTEXT" == test && echo "--dev") requirements.txt | \
-$VIRTUAL_ENV/bin/pip install -r /dev/stdin
+$VIRTUAL_ENV/bin/pip install -r /dev/stdin --upgrade --no-cache-dir --use-deprecated=legacy-resolver
 
 # Copy all files
 COPY . ./
