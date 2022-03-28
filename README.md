@@ -339,3 +339,19 @@ References:
 
       git commit -m "<mymessage>" --no-verify
       git push --no-verify
+      
+- How to revert uncommitted changes tin tracked files
+      
+      git reset -hard
+      
+ - How to delete untracked local files and folders
+      
+      git clean -fxd
+      
+- How to remove all stopped Docker containers
+      
+      docker container prune
+      
+ - How to remove all unused Docker images and volumes
+      
+      docker system prune -y -a --volumes
