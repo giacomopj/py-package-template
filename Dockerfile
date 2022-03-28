@@ -41,7 +41,7 @@ ENV PATH="${POETRY_HOME}/bin:${VIRTUAL_ENV}/bin:${PATH}"
 RUN apt-get update && \
 apt-get upgrade -y && \
 apt-get install -y build-essential git gcc g++ libffi-dev musl-dev && \
-pip3 install pip wheel setuptools
+pip3 install pip wheel setuptools --upgrade pip wheel setuptools
 
 # Install ad-hoc dependencies for Cartopy installation
 RUN apt-get install -y libproj-dev libgeos-dev && \
@@ -77,9 +77,9 @@ RUN poetry add git+https://${GIT_ACCESS_TOKEN}@github.com/nsat/pypredict.git -vv
 
 # Export dependencies from Poetry and install them with Pip
 RUN poetry export --without-hashes -f $(test "$CONTEXT" == test && echo "--dev") requirements.txt | \
-$VIRTUAL_ENV/bin/pip install -r /dev/stdin
+$VIRTUAL_ENV/bin/pip install -r /dev/stdin --upgrade --no-cache-dir --use-deprecated=legacy-resolver
 
-# Copy files
+# Copy all files
 COPY . ./
 
 # Build a wheel with Poetry and then install it with Pip
