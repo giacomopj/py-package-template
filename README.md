@@ -109,7 +109,7 @@ The following steps are to install the Python ecosystem in the host OS:
 - Run all unit tests and check test coverage (optional):
 
       pytest
-      pytest --cov --cov-fail-under=100
+      pytest --cov --cov-fail-under=90
 
 - Run VS Code from inside the virtual environment:
 
