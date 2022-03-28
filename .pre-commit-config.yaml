@@ -70,7 +70,7 @@ repos:
         always_run: true
     -   id: pytest-cov
         name: pytest-cov
-        entry: pytest --cov --cov-fail-under=100
+        entry: pytest --cov --cov-fail-under=90
         stages: [push] # Only before push
         language: system
         types: [python]
