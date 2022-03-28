@@ -106,14 +106,14 @@
 				"build-runner"
 			],
             "command": [
-                "docker run --rm -it -v ${WORKSPACE_PATH}/src:/opt/app/src -v ${WORKSPACE_PATH}/data:/opt/app/data -v ${workspaceFolderBasename}-logs:/opt/app/logs -v ${workspaceFolderBasename}-plots:/opt/app/plots --name run-${workspaceFolderBasename} run-${workspaceFolderBasename}",
+                "docker run --rm -it -v ${WORKSPACE_PATH}/src:/opt/app/src -v ${WORKSPACE_PATH}/tests:/opt/app/tests -v ${WORKSPACE_PATH}/data:/opt/app/data -v ${workspaceFolderBasename}-logs:/opt/app/logs -v ${workspaceFolderBasename}-plots:/opt/app/plots --name run-${workspaceFolderBasename} run-${workspaceFolderBasename}",
             ]
 		},
         {
 			"label": "run-runner-no-build",
 			"type": "shell",
             "command": [
-                "docker run --rm -it -v ${WORKSPACE_PATH}/src:/opt/app/src -v ${WORKSPACE_PATH}/data:/opt/app/data -v ${workspaceFolderBasename}-logs:/opt/app/logs -v ${workspaceFolderBasename}-plots:/opt/app/plots --name run-${workspaceFolderBasename} run-${workspaceFolderBasename}",
+                "docker run --rm -it -v ${WORKSPACE_PATH}/src:/opt/app/src -v ${WORKSPACE_PATH}/tests:/opt/app/tests -v ${WORKSPACE_PATH}/data:/opt/app/data -v ${workspaceFolderBasename}-logs:/opt/app/logs -v ${workspaceFolderBasename}-plots:/opt/app/plots --name run-${workspaceFolderBasename} run-${workspaceFolderBasename}",
             ]
 		}
 	]
