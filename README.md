@@ -1,4 +1,4 @@
-# SigInt Constellation Analyzer
+# SigInt Package Template
 
 This is a repository for the Python package template for Spire SigInt team.
 
