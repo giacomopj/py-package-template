@@ -352,6 +352,6 @@ References:
       
       docker container prune
       
- - How to remove all unused Docker images and volumes
+- How to remove all unused Docker images and volumes
       
       docker system prune -y -a --volumes
