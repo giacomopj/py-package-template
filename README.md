@@ -344,7 +344,7 @@ References:
       
       git reset -hard
       
- - How to delete untracked local files and folders
+- How to delete untracked local files and folders
       
       git clean -fxd
       
