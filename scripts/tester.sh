@@ -10,7 +10,7 @@ pre-commit run --all-files
 # Run all unit tests
 printf "\nRunning unit tests\n"
 pytest
-pytest --cov --cov-fail-under=100
+pytest --cov --cov-fail-under=90
 
 # Run the application executable
 printf "\nRunning application executable\n"
