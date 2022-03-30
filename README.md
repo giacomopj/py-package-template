@@ -8,6 +8,8 @@ The Dockerfile adds specific dependencies that might be useful in most of the te
 
 For installation instructions refer to https://github.com/giacomopj/py-package-template
 
+- Replace value for GIT_ACCESS_TOKEN in **.vscode/setting.json** with personal access token (see https://github.com/settings/tokens)
+
 ## 2. How To
 
 - How to keep up-to-date with this template any branch <branchname> (e.g., master) of any repository based on this template
