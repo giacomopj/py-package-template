@@ -8,7 +8,7 @@ The Dockerfile adds specific dependencies that might be useful in most of the te
 
 For installation instructions refer to https://github.com/giacomopj/py-package-template
 
-Optionally, the value configured for GIT_ACCESS_TOKEN in **.vscode/setting.json** can be replaced with personal access token (see https://github.com/settings/tokens)
+The value configured for GIT_ACCESS_TOKEN in **/.vscode/setting.json** is set by default wih a shared Git access token. Optionally, this value can be replaced with the personal Git access token generated at https://github.com/settings/tokens
 
 ## 2. How To
 
@@ -18,4 +18,12 @@ Optionally, the value configured for GIT_ACCESS_TOKEN in **.vscode/setting.json*
       git fetch --all
       git merge template/<branchname> --allow-unrelated-histories
 
-  Merging the updates inevitably causes a number of conflicts (in README.md, pyproject.toml, etc.) that have to be resolved manually
+  Merging the template updates inevitably causes a number of conflicts (in README.md, pyproject.toml, etc.) that have to be resolved manually one by one
+
+## 3. Windows Workarounds
+
+In case of errors during the Docker image build in VS Code, it might be necessary to implement the following workarounds:
+
+- Manually replacing the environment variables GIT_ACCESS_TOKEN and WORKSPACE_PATH in **/.vscode/tasks.json** with the respective values, which are, respectively, the Git access token and the absolute path to the repository folder with the workspace
+
+- Converting the EOL formatting of .sh files in **/scripts** from CRLF to LF
