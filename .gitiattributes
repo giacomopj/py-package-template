@@ -38,5 +38,4 @@
 *.pyc    binary export-ignore
 *.pyo    binary export-ignore
 *.pyd    binary
-
-*.exe binary
+*.exe    binary
