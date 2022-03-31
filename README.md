@@ -22,9 +22,9 @@ The value configured for GIT_ACCESS_TOKEN in **/.vscode/setting.json** is set by
 
   Merging the template updates inevitably causes a number of conflicts (in README.md, pyproject.toml, etc.) that have to be resolved manually one by one
       
-- How to add a line in the Dockerfile for the Base image in order to add a new dependency from a private Spire nsat repository *repository*:
+- How to add a line in the Dockerfile for the Base image in order to add a new dependency from a private Spire nsat repository *myrepository*:
       
-      RUN poetry add git+https://${GIT_ACCESS_TOKEN}@github.com/nsat/*repository*.git -vvv
+      RUN poetry add git+https://${GIT_ACCESS_TOKEN}@github.com/nsat/*myrepository*.git -vvv
       
   Repositories on nsat currently in the Base image:
   * tlegen
