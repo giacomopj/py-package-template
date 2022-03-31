@@ -32,10 +32,6 @@ The value configured for GIT_ACCESS_TOKEN in **/.vscode/setting.json** is set by
 
 ## 4. Issues With Windows Host OS
 
-VS Code is pre-configured to automatically send commands to Docker and this configuration works well in Linux and MacOS host OSs. If the host OS is Windows, instead, VS Code could fail to build the Docker images from Run and Debug menu. To work around this issue, it might be necessary to make the following modifications:
+VS Code is pre-configured to automatically send commands to Docker and this configuration works well in Linux and MacOS host OSs. On the contrary, VS Code fails to build the Docker images from Run and Debug menu if the host OS is Windows (\*). To solve this issue, it is necessary to launch **/.vscode/fix_tasks_env_var_windows.ps1** from PowerShell
 
-- Manually replacing the environment variables GIT_ACCESS_TOKEN and WORKSPACE_PATH in **/.vscode/tasks.json** with the respective values, which are, respectively, the Git access token and the absolute path to the repository folder with current workspace (\*)
-      
-  (\*) In-built Command Prompt (CMD) or PowerShell (WSL) cannot expand the environment variables in **/.vscode/tasks.json**
-
-- Manually converting the EOL formatting of .sh files in **/scripts** from CRLF to LF
+(\*) In-built Command Prompt (CMD) or PowerShell (WSL) cannot expand the environment variables in **/.vscode/tasks.json**
