@@ -26,7 +26,7 @@ The value configured for GIT_ACCESS_TOKEN in **/.vscode/setting.json** is set by
       
       RUN poetry add git+https://${GIT_ACCESS_TOKEN}@github.com/nsat/*myrepository*.git -vvv
       
-  Repositories on nsat currently in the Base image:
+  Repositories of nsat currently added to the Base image:
   * tlegen
   * pypredict
 
