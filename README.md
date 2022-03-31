@@ -8,7 +8,7 @@ The Dockerfile adds specific dependencies that might be useful in most of the te
 
 For installation instructions refer to https://github.com/giacomopj/py-package-template
 
-The value configured for GIT_ACCESS_TOKEN in **/.vscode/setting.json** is set by default wih a shared Git access token. Optionally, this value can be replaced with the personal Git access token generated at https://github.com/settings/tokens
+The value configured for GIT_ACCESS_TOKEN in **/.vscode/setting.json** is set by default to a shared Git access token. Optionally, this value may be replaced with the personal Git access token, which can be generated at https://github.com/settings/tokens
 
 ## 2. How To
 
