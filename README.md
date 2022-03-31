@@ -32,24 +32,24 @@ The development ecosystem in this repository comprises the following toolchain:
 
 The following steps are to create a new repository from this template:
 
-- Create a new empty repository named <mynewrepo> at </url/of/my/new/repo>
+- Create a new empty repository named *mynewrepo* at */url/of/my/new/repo*
 
 - Run the following commands to clone the template repository:
 
-      git clone https://github.com/giacomopj/py-package-template.git <mynewrepo>
+      git clone https://github.com/giacomopj/py-package-template.git *mynewrepo*
 
   * and keep the commit history:
 
-        cd <mynewrepo>
-        git remote set-url origin </url/of/my/new/repo>
+        cd *mynewrepo*
+        git remote set-url origin */url/of/my/new/repo*
         git push -u origin master
 
   * and cancel the commit history:
 
-        cd <mynewrepo>
+        cd *mynewrepo*
         git rm -rf .git
         git init .
-        git remote set-url origin </url/of/my/new/repo>
+        git remote set-url origin */url/of/my/new/repo*
         git add .
         git commit -m "First commit"
         git push -u origin master
@@ -80,9 +80,9 @@ The following steps are to install the Python ecosystem in the host OS:
 
 - Setup the repository (see Repository Setup)
 
-- Set Python version <x.x.x> (e.g., 3.10.2) for the local workspace:
+- Set Python version *x.x.x* (e.g., 3.10.2) for the local workspace:
 
-      pyenv local <x.x.x>
+      pyenv local *x.x.x*
 
 - Use the local-workspace Python version to be used inside the virtual environment:
 
@@ -312,32 +312,32 @@ References:
 
 ## 4. How To
 
-- How to keep up-to-date with this template any branch <branchname> (e.g., master) of any repository based on this template
+- How to keep up-to-date with this template any branch *branchname* (e.g., master) of any repository based on this template
 
       git remote add template https://github.com/giacomopj/py-package-template.git
       git fetch --all
-      git merge template/<branchname> --allow-unrelated-histories
+      git merge template/*branchname* --allow-unrelated-histories
 
   Merging the updates inevitably causes a number of conflicts (in README.md, pyproject.toml, etc.) that have to be resolved manually
 
-- How to add a new dependency <newdependency> (e.g., a Python library) to the ecosystem:
+- How to add a new dependency *newdependency* (e.g., a Python library) to the ecosystem:
 
-      poetry add <newdependency>
+      poetry add *newdependency*
       git add pyproject.toml
       git add poetry.lock
-      git commit -m "Added <newdependency>"
+      git commit -m "Added *newdependency*"
 
   Adding a dependency requires re-building the Docker image to become effective
 
-- How to generate automatic documentation from the code in a specific format <myformat> (e.g. html) (\*):
+- How to generate automatic documentation from the code in a specific format *myformat* (e.g. html) (\*):
 
-      sphinx-build -b <myformat> src/ docs/<myformat>/
+      sphinx-build -b *myformat* src/ docs/*myformat*/
 
   (\*) If it is not executable from the host OS, this command might be excuted from the bash shell within a container (e.g., Tester image)
 
-- How to commit and push code without pre-commit hooks:
+- How to commit with message *mymessage* and push code without pre-commit hooks:
 
-      git commit -m "<mymessage>" --no-verify
+      git commit -m "*mymessage*" --no-verify
       git push --no-verify
       
 - How to revert uncommitted changes tin tracked files
