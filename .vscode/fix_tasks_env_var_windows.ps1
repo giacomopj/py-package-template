@@ -8,6 +8,7 @@ Write-Host "Workspace path set to parent of current working directory"
 
 $curDir = Get-Location
 $b = Split-Path -Parent $curDir
+$b = $b | % {$_ -replace '/','\'}
 
 Write-Host "Workspace path =" $b
 
