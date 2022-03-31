@@ -24,7 +24,7 @@ The value configured for GIT_ACCESS_TOKEN in **/.vscode/setting.json** is set by
 
 If the host OS is Windows, VS Code could fail to build the Docker images from Run and Debug. To solve this issue, it might be necessary to implement the following workarounds:
 
-- Manually replacing the environment variables GIT_ACCESS_TOKEN and WORKSPACE_PATH in **/.vscode/tasks.json** with the respective values, which are, respectively, the Git access token and the absolute path to the repository folder with the workspace (\*)
+- Manually replacing the environment variables GIT_ACCESS_TOKEN and WORKSPACE_PATH in **/.vscode/tasks.json** with the respective values, which are, respectively, the Git access token and the absolute path to the repository folder with current workspace (\*)
       
   (\*) In-built Command Prompt (CMD) or PowerShell (WSL) cannot expand the environment variables in **/.vscode/tasks.json**
 
