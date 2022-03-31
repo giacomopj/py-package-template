@@ -1,6 +1,6 @@
-Write-Host "Fix environment variables in tasks.json for Windows users"
+Write-Host "Fix environment variables in tasks.json for Windows host OS"
 
-$a = Read-Host -Prompt "Input personal Git access token"
+$a = Read-Host -Prompt "Input Git access token"
 
 Write-Host "Git access token =" $a
 
