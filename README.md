@@ -20,7 +20,7 @@ The value configured for GIT_ACCESS_TOKEN in **/.vscode/setting.json** is set by
       git fetch --all
       git merge template/*branchname* --allow-unrelated-histories
 
-  Merging the template updates inevitably causes a number of conflicts (in README.md, pyproject.toml, etc.) that have to be resolved manually one by one
+  At the first time, merging the template updates inevitably causes a number of conflicts (in README.md, pyproject.toml, etc.) that have to be resolved manually one by one 
       
 - How to add a line in the Dockerfile for the Base image in order to add a new dependency from a private Spire nsat repository *myrepository*:
       
