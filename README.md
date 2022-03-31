@@ -248,7 +248,7 @@ graph TD
 
 ### Build and Run
 
-These three images can be run from Run and Debug in VS Code, either with or without re-building.
+These three images can be run from Run and Debug menu in VS Code, either with or without re-building.
 
 Note that any build is time-consuming and requires Internet connection. A fresh build is necessary only when changing the Dockerfile or the dependencies of the virtual environment.
 
