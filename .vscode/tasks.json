@@ -3,7 +3,7 @@
     "options": {
         "env": {
             "GIT_ACCESS_TOKEN": "${config:GIT_ACCESS_TOKEN}",
-            "WORKSPACE_PATH": "${FOLDER_NAME:fileWorkspaceFolder}"
+            "WORKSPACE_PATH": "${fileWorkspaceFolder}"
         }
     },
 	"tasks": [
