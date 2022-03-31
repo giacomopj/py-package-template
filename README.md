@@ -20,10 +20,12 @@ The value configured for GIT_ACCESS_TOKEN in **/.vscode/setting.json** is set by
 
   Merging the template updates inevitably causes a number of conflicts (in README.md, pyproject.toml, etc.) that have to be resolved manually one by one
 
-## 3. Windows Workarounds
+## 3. Issues With Windows Host OS
 
-In case of errors during the Docker image build in VS Code, it might be necessary to implement the following workarounds:
+If the host OS is Windows, VS Code could fail to build the Docker images from Run and Debug. To solve this issue, it might be necessary to implement the following workarounds:
 
-- Manually replacing the environment variables GIT_ACCESS_TOKEN and WORKSPACE_PATH in **/.vscode/tasks.json** with the respective values, which are, respectively, the Git access token and the absolute path to the repository folder with the workspace
+- Manually replacing the environment variables GIT_ACCESS_TOKEN and WORKSPACE_PATH in **/.vscode/tasks.json** with the respective values, which are, respectively, the Git access token and the absolute path to the repository folder with the workspace (\*)
 
-- Converting the EOL formatting of .sh files in **/scripts** from CRLF to LF
+- Manually converting the EOL formatting of .sh files in **/scripts** from CRLF to LF
+      
+(/*) In-built Command Prompt (CMD) or PowerShell (WSL) cannot expand the environment variables in **/.vscode/tasks.json**
