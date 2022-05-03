@@ -1,8 +1,8 @@
 [tool.poetry]
-name = "sigint-package-template"
+name = "sigint-constellation-analyzer"
 version = "0.1.0"
 description = "SigInt Constellation Analyzer"
-authors = ["Giacomo Pojani <giacomo.pojani@spire.com>"]
+authors = ["Giacomo Pojani <giacomo.pojani@spire.com>", "Patrick Ellis <patrick.ellis@spire.com>"]
 packages = [
     {include = "src"}
 ]
@@ -35,7 +35,7 @@ pdoc3 = "^0.10.0"
 imageio = "^2.16.1"
 
 [tool.poetry.dev-dependencies]
-pytest = "^7.0"
+pytest = "^7.1.1"
 pytest-cov = "^3.0.0"
 pre-commit = "^2.17.0"
 flake8 = "^4.0.1"
@@ -65,6 +65,14 @@ exclude = '''
   )/
 )
 '''
+
+[tool.pytest.ini_options]
+pythonpath = [
+  ".", "src",
+]
+testpaths = [
+    "tests",
+]
 
 [tool.isort]
 multi_line_output = 3
