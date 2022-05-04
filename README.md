@@ -6,11 +6,11 @@ The Dockerfile adds specific dependencies that might be useful in most of the te
 
 ## 1. Installation
 
-For installation instructions refer to https://github.com/giacomopj/py-package-template
+For installation instructions refer to https://github.com/giacomopj/py-package-template.
 
 ## 2. Git Access Token
 
-The value configured for GIT_ACCESS_TOKEN in **/.vscode/setting.json** is set by default to a shared Git access token. Optionally, this value may be replaced with a personal Git access token, which can be generated at https://github.com/settings/tokens
+The value configured for GIT_ACCESS_TOKEN in **/.vscode/setting.json** is set by default to a shared Git access token. Optionally, this value may be replaced with a personal Git access token, which can be generated at https://github.com/settings/tokens.
 
 ## 3. How To
 
@@ -32,6 +32,6 @@ The value configured for GIT_ACCESS_TOKEN in **/.vscode/setting.json** is set by
 
 ## 4. Issues With Windows Host OS
 
-VS Code is pre-configured to automatically send commands to Docker and this configuration works well in Linux and MacOS. On the contrary, VS Code fails to build the Docker images from Run and Debug menu if the host OS is Windows (\*). To solve this issue, it is necessary to launch **/.vscode/fix_tasks_env_var_windows.ps1** from PowerShell
+VS Code is pre-configured to automatically send commands to Docker and this configuration works well in Linux and MacOS. On the contrary, VS Code fails to build the Docker images from Run and Debug menu if the host OS is Windows (\*). To solve this issue, it is necessary to launch **/.vscode/fix_tasks_env_var_windows.ps1** from PowerShell.
 
 (\*) In-built Command Prompt (CMD) or PowerShell (WSL) cannot expand the environment variables in **/.vscode/tasks.json**
