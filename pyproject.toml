@@ -1,7 +1,7 @@
 [tool.poetry]
-name = "sigint-constellation-analyzer"
+name = "sigint-package-template"
 version = "0.1.0"
-description = "SigInt Constellation Analyzer"
+description = "SigInt Package Template"
 authors = ["Giacomo Pojani <giacomo.pojani@spire.com>", "Patrick Ellis <patrick.ellis@spire.com>"]
 packages = [
     {include = "src"}
