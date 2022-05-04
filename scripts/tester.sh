@@ -12,9 +12,5 @@ printf "\nRunning unit tests\n"
 pytest
 pytest --cov --cov-fail-under=90
 
-# Run the application executable
-printf "\nRunning application executable\n"
-python -m src Tester Container
-
 # Run terminal with bash shell
 /bin/bash
