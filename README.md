@@ -1,6 +1,6 @@
-# SigInt Package Template
+# Package Template
 
-This is a repository for the Python package template for Spire SigInt team.
+This is a repository for the Python package template for Spire Advanced Signal Processing Group.
 
 The Dockerfile adds specific dependencies that might be useful in most of the team repositories.
 
