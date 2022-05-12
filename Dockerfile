@@ -79,6 +79,9 @@ RUN poetry add git+https://${GIT_ACCESS_TOKEN}@github.com/nsat/pypredict.git -vv
 RUN poetry export --without-hashes -f $(test "$CONTEXT" == test && echo "--dev") requirements.txt | \
 $VIRTUAL_ENV/bin/pip install -r /dev/stdin --upgrade --no-cache-dir --use-deprecated=legacy-resolver
 
+# Re-install Shapely to prevent Geos compatibility issues
+RUN pip3 uninstall shapely -y -v && pip3 install --no-binary :all: shapely -v
+
 # Copy all files
 COPY . ./
 
