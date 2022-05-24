@@ -1,7 +1,7 @@
 [tool.poetry]
-name = "aspg-package-template"
+name = "aspg-py-package-template"
 version = "0.1.0"
-description = "Package Template"
+description = "Python Package Template"
 authors = ["Giacomo Pojani <giacomo.pojani@spire.com>", "Patrick Ellis <patrick.ellis@spire.com>"]
 packages = [
     {include = "src"}
