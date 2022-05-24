@@ -1,4 +1,4 @@
-# Package Template
+# Python Package Template
 
 This is a repository for the Python package template for Spire Advanced Signal Processing Group.
 
