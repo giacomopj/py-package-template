@@ -16,7 +16,7 @@ The value configured for GIT_ACCESS_TOKEN in **/.vscode/setting.json** is set by
 
 - How to keep up-to-date with this template any branch *branchname* (e.g., master) of any repository based on this template:
 
-      git remote add template https://github.com/giacomopj/aspg-package-template.git
+      git remote add template https://github.com/giacomopj/aspg-py-package-template.git
       git fetch --all
       git merge template/*branchname* --allow-unrelated-histories
 
