@@ -12,7 +12,7 @@
         },
         {
             "name": "Build Runner",
-            "type": "shell",
+            "type": "python",
             "request": "launch",
             "preLaunchTask": "build-runner"
         },
@@ -32,7 +32,7 @@
         },
         {
             "name": "Build Debugger",
-            "type": "shell",
+            "type": "python",
             "request": "launch",
             "preLaunchTask": "build-debugger"
         },
@@ -54,7 +54,7 @@
         },
         {
             "name": "Build Tester",
-            "type": "shell",
+            "type": "python",
             "request": "launch",
             "preLaunchTask": "build-tester"
         },
