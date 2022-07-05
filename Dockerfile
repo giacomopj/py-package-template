@@ -131,8 +131,15 @@ CMD ["./scripts/runner.sh"]
 # Set tester image
 FROM base AS tester
 
-# Install optional dependencies for automatic documentation
-RUN poetry install --extras docs --no-interaction --no-ansi --no-root
+# Update versions of the dependencies (if needed)
+RUN poetry update --lock -vvv
+
+# Install extra dependencies for automatic documentation
+# RUN poetry install --extras docs --no-interaction --no-ansi --no-root
+
+# Export extra dependencies from Poetry and install them with Pip
+RUN poetry export --without-hashes --extras docs -f requirements.txt | \
+$VIRTUAL_ENV/bin/pip install -r /dev/stdin --upgrade --no-cache-dir --use-deprecated=legacy-resolver
 
 # Copy environment
 COPY --from=base $VIRTUAL_ENV $VIRTUAL_ENV
