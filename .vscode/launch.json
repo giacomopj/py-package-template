@@ -11,7 +11,13 @@
             "envFile": "${workspaceFolder}/.env"
         },
         {
-            "name": "Docker Runner",
+            "name": "Build Runner",
+            "type": "python",
+            "request": "launch",
+            "preLaunchTask": "build-runner"
+        },
+        {
+            "name": "Launch Runner",
             "type": "docker",
             "request": "launch",
             "preLaunchTask": "run-runner",
@@ -25,21 +31,13 @@
             }
         },
         {
-            "name": "Docker Runner [No build]",
-            "type": "docker",
+            "name": "Build Debugger",
+            "type": "python",
             "request": "launch",
-            "preLaunchTask": "run-runner-no-build",
-            "python": {
-                "pathMappings": [
-                    {
-                        "localRoot": "${workspaceFolder}",
-                        "remoteRoot": "/opt/app"
-                    }
-                ],
-            }
+            "preLaunchTask": "build-debugger"
         },
         {
-            "name": "Docker Debugger",
+            "name": "Launch Debugger",
             "type": "docker",
             "request": "attach",
             "preLaunchTask": "run-debugger",
@@ -55,24 +53,16 @@
             }
         },
         {
-            "name": "Docker Tester",
+            "name": "Build Tester",
+            "type": "python",
+            "request": "launch",
+            "preLaunchTask": "build-tester"
+        },
+        {
+            "name": "Launch Tester",
             "type": "docker",
             "request": "launch",
             "preLaunchTask": "run-tester",
-            "python": {
-                "pathMappings": [
-                    {
-                        "localRoot": "${workspaceFolder}",
-                        "remoteRoot": "/opt/app"
-                    }
-                ],
-            }
-        },
-        {
-            "name": "Docker Tester [No build]",
-            "type": "docker",
-            "request": "launch",
-            "preLaunchTask": "run-tester-no-build",
             "python": {
                 "pathMappings": [
                     {

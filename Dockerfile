@@ -7,8 +7,10 @@ LABEL maintainer="Giacomo Pojani <giacomo.pj@hotmail.it>"
 
 # Get input parameters
 # CONTEXT defines the stage context environment (e.g., run, debug, test)
+# POETRY_VERSION defines Poetry version
 ARG CONTEXT=run
 ARG POETRY_VERSION=1.1.13
+ARG GIT_ACCESS_TOKEN=ghp_
 
 # Set environment variables
 ENV CONTEXT=$CONTEXT \
@@ -39,7 +41,11 @@ ENV PATH="${POETRY_HOME}/bin:${VIRTUAL_ENV}/bin:${PATH}"
 RUN apt-get update && \
 apt-get upgrade -y && \
 apt-get install -y build-essential git gcc g++ libffi-dev musl-dev && \
-pip3 install --upgrade pip wheel setuptools
+pip3 install pip wheel setuptools --upgrade pip wheel setuptools
+
+# Install ad-hoc dependencies for Cartopy installation
+RUN apt-get install -y libproj-dev libgeos-dev && \
+apt-get install -y proj-data proj-bin
 
 # Install Poetry
 RUN pip3 install poetry==${POETRY_VERSION}
@@ -62,12 +68,19 @@ COPY pyproject.toml poetry.lock ./
 # Update versions of the dependencies (if needed)
 RUN poetry update $(test "$CONTEXT" != test && echo "--no-dev") --lock -vvv
 
+# Add ad-hoc dependencies of Spire nsat repositories
+# RUN poetry add git+https://${GIT_ACCESS_TOKEN}@github.com/nsat/tlegen.git -vvv
+# RUN poetry add git+https://${GIT_ACCESS_TOKEN}@github.com/nsat/pypredict.git -vvv
+
 # Install dependencies
 #  RUN poetry install $(test "$CONTEXT" != test && echo "--no-dev") --no-interaction --no-ansi --no-root -vvv
 
 # Export dependencies from Poetry and install them with Pip
 RUN poetry export --without-hashes -f $(test "$CONTEXT" == test && echo "--dev") requirements.txt | \
 $VIRTUAL_ENV/bin/pip install -r /dev/stdin --upgrade --no-cache-dir --use-deprecated=legacy-resolver
+
+# Re-install Shapely to prevent Geos compatibility issues
+RUN pip3 uninstall shapely -y -v && pip3 install --no-binary :all: shapely -v
 
 # Copy all files
 COPY . ./
@@ -118,8 +131,15 @@ CMD ["./scripts/runner.sh"]
 # Set tester image
 FROM base AS tester
 
-# Install optional dependencies for automatic documentation
-RUN poetry install --extras docs --no-interaction --no-ansi --no-root
+# Update versions of the dependencies (if needed)
+RUN poetry update --lock -vvv
+
+# Install extra dependencies for automatic documentation
+# RUN poetry install --extras docs --no-interaction --no-ansi --no-root
+
+# Export extra dependencies from Poetry and install them with Pip
+RUN poetry export --without-hashes --extras docs -f requirements.txt | \
+$VIRTUAL_ENV/bin/pip install -r /dev/stdin --upgrade --no-cache-dir --use-deprecated=legacy-resolver
 
 # Copy environment
 COPY --from=base $VIRTUAL_ENV $VIRTUAL_ENV

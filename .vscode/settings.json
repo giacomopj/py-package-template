@@ -1,4 +1,5 @@
 {
+    "GIT_ACCESS_TOKEN": "ghp_",
     "python.pythonPath": ".venv/bin/python",
     "python.languageServer": "Pylance",
     "python.linting.mypyPath": ".venv/bin/mypy",

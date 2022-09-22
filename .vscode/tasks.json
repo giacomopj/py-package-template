@@ -2,7 +2,9 @@
 	"version": "2.0.0",
     "options": {
         "env": {
-            "WORKSPACE_PATH": "${fileWorkspaceFolder}"
+            "GIT_ACCESS_TOKEN": "${config:GIT_ACCESS_TOKEN}",
+            "WORKSPACE_PATH": "${fileWorkspaceFolder}",
+            "IMAGE_SUFFIX": "${input:imageSuffix}"
         }
     },
 	"tasks": [
@@ -20,7 +22,7 @@
 				"cleanup-dangling-images"
 			],
             "command": [
-                "docker build --build-arg CONTEXT=test --target=tester -t test-${workspaceFolderBasename} ."
+                "docker build --build-arg GIT_ACCESS_TOKEN=${GIT_ACCESS_TOKEN} --build-arg CONTEXT=test --target=tester -t test-${workspaceFolderBasename} ."
             ]
         },
 		{
@@ -30,7 +32,7 @@
 				"cleanup-dangling-images"
 			],
             "command": [
-                "docker build --target=debugger -t debug-${workspaceFolderBasename} ."
+                "docker build --build-arg GIT_ACCESS_TOKEN=${GIT_ACCESS_TOKEN} --target=debugger -t debug-${workspaceFolderBasename} ."
             ]
         },
 		{
@@ -40,46 +42,33 @@
 				"cleanup-dangling-images"
 			],
             "command": [
-                "docker build --target=runner -t run-${workspaceFolderBasename} ."
+                "docker build --build-arg GIT_ACCESS_TOKEN=${GIT_ACCESS_TOKEN} --target=runner -t run-${workspaceFolderBasename} ."
             ]
         },
         {
 			"label": "run-tester",
 			"type": "shell",
-			"dependsOn": [
-				"build-tester"
-			],
             "command": [
-                "docker run --rm -it -v ${WORKSPACE_PATH}/src:/opt/app/src -v ${WORKSPACE_PATH}/tests:/opt/app/tests -v ${WORKSPACE_PATH}/data:/opt/app/data -v ${workspaceFolderBasename}-logs:/opt/app/logs -v ${workspaceFolderBasename}-plots:/opt/app/plots --name test-${workspaceFolderBasename} test-${workspaceFolderBasename}",
-            ]
-		},
-        {
-			"label": "run-tester-no-build",
-			"type": "shell",
-            "command": [
-                "docker run --rm -it -v ${WORKSPACE_PATH}/src:/opt/app/src -v ${WORKSPACE_PATH}/tests:/opt/app/tests -v ${WORKSPACE_PATH}/data:/opt/app/data -v ${workspaceFolderBasename}-logs:/opt/app/logs -v ${workspaceFolderBasename}-plots:/opt/app/plots --name test-${workspaceFolderBasename} test-${workspaceFolderBasename}",
+                "docker run --rm -it -v ${WORKSPACE_PATH}/src:/opt/app/src -v ${WORKSPACE_PATH}/tests:/opt/app/tests -v ${WORKSPACE_PATH}/data:/opt/app/data -v ${workspaceFolderBasename}-logs:/opt/app/logs -v ${workspaceFolderBasename}-plots:/opt/app/plots --name test-${workspaceFolderBasename}-$IMAGE_SUFFIX test-${workspaceFolderBasename}",
             ]
 		},
 		{
 			"type": "docker-run",
 			"label": "run-debugger",
-			"dependsOn": [
-                "build-debugger"
-			],
 			"python": {
 				"args": ["Debugger", "Container"],
 				"module": "src"
 			},
 			"dockerRun": {
                 "image": "debug-${workspaceFolderBasename}",
-                "containerName": "debug-${workspaceFolderBasename}",
+                "containerName": "debug-${workspaceFolderBasename}-$IMAGE_SUFFIX",
                 "remove": true,
                 "volumes": [
                     {
                         "containerPath": "/opt/app/src",
                         "localPath": "${workspaceFolder}/src"
                     },
-		    {
+                    {
                         "containerPath": "/opt/app/tests",
                         "localPath": "${workspaceFolder}/tests"
                     },
@@ -98,22 +87,23 @@
                 ]
             }
 		},
-		{
+        {
 			"label": "run-runner",
 			"type": "shell",
-			"dependsOn": [
-				"build-runner"
-			],
             "command": [
-                "docker run --rm -it -v ${WORKSPACE_PATH}/src:/opt/app/src -v ${WORKSPACE_PATH}/tests:/opt/app/tests -v ${WORKSPACE_PATH}/data:/opt/app/data -v ${workspaceFolderBasename}-logs:/opt/app/logs -v ${workspaceFolderBasename}-plots:/opt/app/plots --name run-${workspaceFolderBasename} run-${workspaceFolderBasename}",
-            ]
-		},
-        {
-			"label": "run-runner-no-build",
-			"type": "shell",
-            "command": [
-                "docker run --rm -it -v ${WORKSPACE_PATH}/src:/opt/app/src -v ${WORKSPACE_PATH}/tests:/opt/app/tests -v ${WORKSPACE_PATH}/data:/opt/app/data -v ${workspaceFolderBasename}-logs:/opt/app/logs -v ${workspaceFolderBasename}-plots:/opt/app/plots --name run-${workspaceFolderBasename} run-${workspaceFolderBasename}",
+                "docker run --rm -it -v ${WORKSPACE_PATH}/src:/opt/app/src -v ${WORKSPACE_PATH}/tests:/opt/app/tests -v ${WORKSPACE_PATH}/data:/opt/app/data -v ${workspaceFolderBasename}-logs:/opt/app/logs -v ${workspaceFolderBasename}-plots:/opt/app/plots --name run-${workspaceFolderBasename}-$IMAGE_SUFFIX run-${workspaceFolderBasename}",
             ]
 		}
-	]
+	],
+    "inputs": [
+        {
+            "id": "imageSuffix",
+            "type": "command",
+            "command": "shellCommand.execute",
+            "args": {
+                "command": "uuidgen",
+                "useFirstResult": true
+            }
+        }
+    ],
 }

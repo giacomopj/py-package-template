@@ -144,6 +144,10 @@ The following steps are to build the custom Linux image hosting the development 
 
 - Press "Docker Runner" from Debug and Run to launch the application in a container (optional)
 
+## 2.3. Git Access Token
+
+The value configured for GIT_ACCESS_TOKEN in **/.vscode/setting.json** is empty by default. This value may be replaced with a personal Git access token, which can be generated at https://github.com/settings/tokens.
+
 ## 3. Template Design
 
 The template is designed to match the directory structure and the configuration of VS Code interactions with Docker. These scripts should speed up the development as well as the handling of input/output files to and from the running containers.
@@ -355,3 +359,31 @@ References:
 - How to remove all unused Docker images and volumes
       
       docker system prune -y -a --volumes
+
+- How to keep up-to-date any branch *branchname* (e.g., master) of any repository with this template:
+
+      git remote add template https://github.com/giacomopj/aspg-py-package-template.git
+      git fetch --all
+      git merge template/*branchname* --allow-unrelated-histories
+
+  At the first time, merging the template updates inevitably causes a number of conflicts (in README.md, pyproject.toml, etc.) that have to be resolved manually one by one
+
+## 5. Issues With Windows Host OS
+
+VS Code is pre-configured to automatically send commands to Docker and this configuration works well in Linux and MacOS. On the contrary, VS Code fails to build the Docker images from Run and Debug menu if the host OS is Windows (\*). To solve this issue, it is necessary to launch **/.vscode/fix_tasks_env_var_windows.ps1** from PowerShell.
+
+        cd *mynewrepo*
+        git remote set-url origin */url/of/my/new/repo*
+        git push -u origin master
+
+  * and cancel the commit history:
+
+        cd *mynewrepo*
+        git rm -rf .git
+        git init .
+        git remote set-url origin */url/of/my/new/repo*
+        git add .
+        git commit -m "First commit"
+        git push -u origin master
+
+(\*) In-built Command Prompt (CMD) or PowerShell (WSL) cannot expand the environment variables in **/.vscode/tasks.json**
