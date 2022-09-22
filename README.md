@@ -368,7 +368,7 @@ References:
 
   At the first time, merging the template updates inevitably causes a number of conflicts (in README.md, pyproject.toml, etc.) that have to be resolved manually one by one
 
-## 5. Issues With Windows Host OS (deprecated)
+## 5. Issues With Windows Host OS
 
 VS Code is pre-configured to automatically send commands to Docker and this configuration works well in Linux and MacOS. On the contrary, VS Code fails to build the Docker images from Run and Debug menu if the host OS is Windows (\*). To solve this issue, it is necessary to launch **/.vscode/fix_tasks_env_var_windows.ps1** from PowerShell.
 
