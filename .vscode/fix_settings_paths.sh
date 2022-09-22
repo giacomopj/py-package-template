@@ -8,7 +8,7 @@ env_path=$(poetry env info --path)
 echo $env
 
 echo "{
-    \"GIT_ACCESS_TOKEN\": \"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\",
+    \"GIT_ACCESS_TOKEN\": \"ghp_\",
     \"python.pythonPath\": \"${env_path}/bin/python\",
     \"python.languageServer\": \"Pylance\",
     \"python.linting.mypyPath\": \"${env_path}/bin/mypy\",
